@@ -26,7 +26,7 @@ function checkAlive() {
 	// console.log(pluginName,"ESTA VIVO?",$(":contains(Digite uma mensagem)"));
 
 	var contatosDom = document.querySelectorAll("[tabindex]")[2];
-	var imgDom 	    = $(contatosDom).find("img")[1];
+	var imgDom 	    = $(contatosDom).find("img")[0];
 	// console.log('contatosDom',contatosDom);
 	// console.log('imgDom',imgDom);
 
@@ -47,7 +47,7 @@ function checkAlive() {
 			textbox.dispatchEvent(event);
 		
 
-			// $('[data-icon="send"]').trigger('click');
+			$('[data-icon="send"]').trigger('click');
 
 		}
 		
