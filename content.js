@@ -26,7 +26,7 @@ function checkAlive() {
 	// console.log(pluginName,"ESTA VIVO?",$(":contains(Digite uma mensagem)"));
 
 	var contatosDom = document.querySelectorAll("[tabindex]")[2];
-	var imgDom 	    = $(contatosDom).find("img")[0];
+	var imgDom 	    = $(contatosDom).find("img")[1];
 	// console.log('contatosDom',contatosDom);
 	// console.log('imgDom',imgDom);
 
@@ -37,17 +37,17 @@ function checkAlive() {
 			simulateMouseEvents(imgDom, 'mousedown');
 
 
-			// $('.selectable-text[spellcheck]').html("Bot do demonio");
-			// console.log($('[data-icon="send"]'));
+			$('.selectable-text[spellcheck]').html("Bot do demonio");
+			console.log($('[data-icon="send"]'));
 
 			var event = new InputEvent('input', {bubbles: true});
 			var textbox = document.querySelector('.selectable-text[spellcheck]');
 
-			textbox.textContent = 'Bot do demonio';
+			textbox.textContent = 'Bot do demonio feito para plugin do chrome !!!!!';
 			textbox.dispatchEvent(event);
 		
 
-			$('[data-icon="send"]').trigger('click');
+			// $('[data-icon="send"]').trigger('click');
 
 		}
 		
