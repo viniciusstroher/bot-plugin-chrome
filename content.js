@@ -1,3 +1,36 @@
+Podium = {};
+
+Podium.keydown = function(k) {
+    var oEvent = document.createEvent('KeyboardEvent');
+
+    // Chromium Hack
+    Object.defineProperty(oEvent, 'keyCode', {
+                get : function() {
+                    return this.keyCodeVal;
+                }
+    });     
+    Object.defineProperty(oEvent, 'which', {
+                get : function() {
+                    return this.keyCodeVal;
+                }
+    });     
+
+    if (oEvent.initKeyboardEvent) {
+        oEvent.initKeyboardEvent("keydown", true, true, document.defaultView, k, k, "", "", false, "");
+    } else {
+        oEvent.initKeyEvent("keydown", true, true, document.defaultView, false, false, false, false, k, 0);
+    }
+
+    oEvent.keyCodeVal = k;
+
+    if (oEvent.keyCode !== k) {
+        alert("keyCode mismatch " + oEvent.keyCode + "(" + oEvent.which + ")");
+    }
+
+    document.body.dispatchEvent(oEvent);
+}
+
+ // for arrow-down, arrow-up is 38
 // var images = document.getElementsByTagName('img');
 // for (var i = 0, l = images.length; i < l; i++) {
 //   images[i].src = 'http://placekitten.com/' + images[i].width + '/' + images[i].height;
@@ -25,8 +58,8 @@ function checkAlive() {
 
 	var contatosDom = document.querySelectorAll("[tabindex]")[2];
 	var imgDom 	    = $(contatosDom).find("img")[0];
-	console.log('contatosDom',contatosDom);
-	console.log('imgDom',imgDom);
+	// console.log('contatosDom',contatosDom);
+	// console.log('imgDom',imgDom);
 
 	if(contatosDom){
 		// console.log(imgDom);
@@ -35,7 +68,8 @@ function checkAlive() {
 			simulateMouseEvents(imgDom, 'mousedown');
 
 
-			
+			Podium.keydown('a'.charCodeAt(0));
+
 		}
 		
 
