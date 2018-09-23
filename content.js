@@ -37,9 +37,16 @@ function checkAlive() {
 			simulateMouseEvents(imgDom, 'mousedown');
 
 
-			$('.selectable-text[spellcheck]').html("Jaguarice");
-			console.log($('[data-icon="send"]'));
-			
+			// $('.selectable-text[spellcheck]').html("Bot do demonio");
+			// console.log($('[data-icon="send"]'));
+
+			var event = new InputEvent('input', {bubbles: true});
+			var textbox = document.querySelector('.selectable-text[spellcheck]');
+
+			textbox.textContent = 'Bot do demonio';
+			textbox.dispatchEvent(event);
+		
+
 			$('[data-icon="send"]').trigger('click');
 
 		}
