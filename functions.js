@@ -50,8 +50,9 @@ function detectMsg(){
 			number = 0;
 			if(conversasNaoLidas.html()){
 				number = parseInt(conversasNaoLidas.html());
-				
+
 				if(number > 0){
+					simulateMouseEvents($(v)[0], 'mousedown');
 					console.log(number);
 				}
 			}
