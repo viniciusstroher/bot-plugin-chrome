@@ -41,9 +41,12 @@ function detectMsg(){
 	if(contatosDom != null){
 								//TROCAR PARA querySelectorAll ao invez de querySelector
 		var contatosListDom   = contatosDom.querySelector("[tabindex]");
-		var conversasNaoLidas = $(contatosListDom).find("div > div:eq(3) > div:eq(1) > div:eq(1) span");
+		var conversasNaoLidas = $(contatosListDom).find("div > div:eq(3) > div:eq(1) > div:eq(1) span div span");
 
-		console.log(conversasNaoLidas);
+		if(conversasNaoLidas.html()){
+			
+		}
+		console.log(conversasNaoLidas.html());
 		// console.log(contatosListDom);
 		// $(contatosListDom).each(function(){
 		// 	var dom =$(this).find("div:eq(1) div:eq(1) div:eq(1)");
