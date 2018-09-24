@@ -6,28 +6,50 @@ function simulateMouseEvents(element, eventName) {
 
 function checkAlive() {
 	
+	// selectPerfil(0);
+	detectMsg()
+
+}
+
+function selectPerfil(index){
 	var contatosDom = document.querySelectorAll("[tabindex]")[2];
-	var imgDom 	    = $(contatosDom).find("img")[0];
+	var imgDom 	    = $(contatosDom).find("img")[index];
 	
 	if(contatosDom){
-		
 		if(imgDom != null){
 			simulateMouseEvents(imgDom, 'mousedown');
-
-			var event = new InputEvent('input', {bubbles: true});
-			var textbox = document.querySelector('.selectable-text[spellcheck]');
-
-			if(textbox != null){
-				textbox.textContent = 'Bot do demonio feito para plugin do chrome !!!!!';
-				textbox.dispatchEvent(event);
-			}
-
-			// $('[data-icon="send"]').trigger('click');
-
+			write();
 		}
-		
-
 	}
-	
+}
+
+function write(){
+	var event   = new InputEvent('input', {bubbles: true});
+	var textbox = document.querySelector('.selectable-text[spellcheck]');
+
+	if(textbox != null){
+		textbox.textContent = 'Bot do demonio feito para plugin do chrome !!!!!';
+		textbox.dispatchEvent(event);
+	}
+	// $('[data-icon="send"]').trigger('click');
+
 	// $("[tabindex] div:eq(0)").trigger("click");
+}
+
+function detectMsg(){
+	var contatosDom  	= document.querySelectorAll("[tabindex]")[2];
+	if(contatosDom != null){
+								//TROCAR PARA querySelectorAll ao invez de querySelector
+		var contatosListDom   = contatosDom.querySelector("[tabindex]");
+		var conversasNaoLidas = $(contatosListDom).find("div > div:eq(3) > div:eq(1) > div:eq(1) span");
+
+		console.log(conversasNaoLidas);
+		// console.log(contatosListDom);
+		// $(contatosListDom).each(function(){
+		// 	var dom =$(this).find("div:eq(1) div:eq(1) div:eq(1)");
+		// 	console.log(dom[0]);
+		// });
+		//$(contatosListDom).find(":has(span:lt(3))");
+		// console.log(spansDom);
+	}
 }
