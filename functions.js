@@ -40,13 +40,24 @@ function detectMsg(){
 	var contatosDom  	= document.querySelectorAll("[tabindex]")[2];
 	if(contatosDom != null){
 								//TROCAR PARA querySelectorAll ao invez de querySelector
-		var contatosListDom   = contatosDom.querySelector("[tabindex]");
-		var conversasNaoLidas = $(contatosListDom).find("div > div:eq(3) > div:eq(1) > div:eq(1) span div span");
+		// var contatosListDom   = contatosDom.querySelector("[tabindex]");
 
-		if(conversasNaoLidas.html()){
-			
-		}
-		console.log(conversasNaoLidas.html());
+		var contatosListDom   = contatosDom.querySelectorAll("[tabindex]");
+		// var conversasNaoLidas = $(contatosListDom).find("div > div:eq(3) > div:eq(1) > div:eq(1) span div span");
+		
+		$.each(contatosListDom,function(k,v){
+			var conversasNaoLidas = $(v).find("div > div:eq(3) > div:eq(1) > div:eq(1) span div span");
+			number = 0;
+			if(conversasNaoLidas.html()){
+				number = parseInt(conversasNaoLidas.html());
+				
+				if(number > 0){
+					console.log(number);
+				}
+			}
+		});
+		
+		
 		// console.log(contatosListDom);
 		// $(contatosListDom).each(function(){
 		// 	var dom =$(this).find("div:eq(1) div:eq(1) div:eq(1)");
