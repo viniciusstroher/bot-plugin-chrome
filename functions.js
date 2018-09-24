@@ -52,7 +52,7 @@ function detectMsg(){
 				number = parseInt(conversasNaoLidas.html());
 
 				if(number > 0){
-					simulateMouseEvents($(v)[0], 'mousedown');
+					simulateMouseEvents($(v).find("img")[0], 'mousedown');
 					console.log(number);
 				}
 			}
