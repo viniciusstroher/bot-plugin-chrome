@@ -17,7 +17,7 @@ function save_options() {
 }
 
 function restore_options() {
-  document.getElementById('status').value = localStorage.CRstatus;
+  document.getElementById('status').value = localStorage.CRstatus ? localStorage.CRstatus : "true";
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
