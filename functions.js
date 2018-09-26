@@ -1,6 +1,7 @@
 var contatos 	= {};
 var salaStandBy = "STANDY_BY_BOT";
 var salaStandyIniciada = false;
+salaStandyIniciada 	   = true;
 
 function simulateMouseEvents(element, eventName) {
     var mouseEvent = document.createEvent ('MouseEvents');
@@ -11,10 +12,12 @@ function simulateMouseEvents(element, eventName) {
 function checkAlive() {
 
 	
-	if(!salaStandyIniciada && avaliableWriteMsgToContact()){
+	if(!salaStandyIniciada){
 		// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
+		
 		var contactsDOM = getAllContacts();
 		console.log(contactsDOM);
+
 		if(contactsDOM != null){
 			console.log(contactsDOM);
 		}
@@ -142,6 +145,19 @@ child.child.child.memoizedState.chats[0].collection.find(num+"@c.us")
 .then(function(e) { e.sendMessage(msg) });
 
 }
+
+function write(num,msg){
+	setTimeout(function(){
+	  	var script = document.createElement("script");
+		script.setAttribute("type", "text/javascript");
+		// script.innerHTML = "console.log(document.querySelector(\"#app\")._reactRootContainer);";
+		script.innerHTML = "document.querySelector('#app')._reactRootContainer._internalRoot.current.child.child.child.child.child.child.sibling.sibling.sibling.sibling.sibling.child.child.child.child.child.sibling.sibling.sibling.sibling.sibling.child.child.child.child.memoizedState.chats[0].collection.find('"+num+"@c.us').then(function(e) { e.sendMessage('"+msg+"') });";
+		document.getElementsByTagName("head")[0].appendChild(script);
+		console.log("RUN");
+	},10000);
+  
+}
+
 
 function getActualName(){
 	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
