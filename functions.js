@@ -14,7 +14,7 @@ function simulateMouseEvents(element, eventName) {
 
 function checkAlive() {
 	
-	if(isLoaded()){
+	if(!isLoaded()){
 		if(!salaStandyIniciada){
 			// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
 			if(!loadSomeThing){
@@ -134,11 +134,12 @@ function loadContacts(){
 			contatos[name].dataUltMsg = dataultmsg;
 			contatos[name].conversas  = [];
 			
+			console.log($(v.querySelectorAll("div > div > span")));
 			console.log($(v.querySelectorAll("div > div > span")[2])[0]);
 
-			simulateMouseEvents($(v.querySelectorAll("div > div > span")[2]), 'mousedown');
+			simulateMouseEvents($(v.querySelectorAll("div > div > span")[2])[0], 'mousedown');
 
-			contatos[name].conversas = getConversations();
+			contatos[name].conversas = getConversation(1);
 		}
 	});
 
