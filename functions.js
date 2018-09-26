@@ -120,6 +120,8 @@ function getAllContacts(){
 function loadContacts(){
 	var c = getAllContacts();
 	
+	c = [c[0],c[1],c[2]];
+	sleep(500);
 	$.each(c,function(k,v){
 		var name       = v.querySelectorAll("div > div > span")[1].textContent;
 		var dataultmsg = v.querySelectorAll("div > div > span")[2].textContent;
@@ -133,13 +135,11 @@ function loadContacts(){
 			contatos[name].nome 	  = name;
 			contatos[name].dataUltMsg = dataultmsg;
 			contatos[name].conversas  = [];
+
+
+			simulateMouseEvents($(v.querySelectorAll("div > div"))[0], 'mousedown');
+			console.log("start");
 			
-			console.log($(v.querySelectorAll("div > div > span")));
-			console.log($(v.querySelectorAll("div > div > span")[2])[0]);
-
-			simulateMouseEvents($(v.querySelectorAll("div > div > span")[2])[0], 'mousedown');
-
-			sleep(2000);
 			var maxConversations = getConversationsIndex();
 			console.log('maxConversations',maxConversations);
 
@@ -149,6 +149,7 @@ function loadContacts(){
 											   date: getConversationNameAndDate(i)
 											 });
 			}
+			sleep(1000);
 		}
 	});
 
