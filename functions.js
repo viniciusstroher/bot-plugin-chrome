@@ -108,14 +108,17 @@ function loadContacts(){
 	var c = getAllContacts();
 	
 	$.each(c,function(k,v){
-		var name = v.querySelectorAll("div > div > span")[1].textContent;
+		var name       = v.querySelectorAll("div > div > span")[1].textContent;
+		var dataultmsg = v.querySelectorAll("div > div > span")[2].textContent;
 		
 		//CARREGA CONTATOS
 		var nomeContato = name;
 		if(!contatos.hasOwnProperty(name)){
-			contatos[name] 			 = {};
-			contatos[name].conversas = [];
-			console.log('atualizando contato',name);
+			contatos[name] 			  = {};
+			contatos[name].nome 	  = name;
+			contatos[name].dataUltMsg = dataultmsg;
+			contatos[name].conversas  = [];
+			console.log('atualizando contato',name,'last msg',dataultmsg);
 		}
 	});
 
