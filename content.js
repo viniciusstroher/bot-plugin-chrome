@@ -1,5 +1,6 @@
 window.onload = function() {
 	var pluginName 		   = "PLUGIN WATZ";
+
 	console.log(pluginName);
 
 	chrome.storage.sync.get(['status'], function(items) {
@@ -8,7 +9,7 @@ window.onload = function() {
 	  	throw "plugin desabilitado";
 	  }
 	  setInterval(checkAlive,1000);
-	  
+
 	});
 }
 

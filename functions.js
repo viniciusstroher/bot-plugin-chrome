@@ -1,8 +1,8 @@
 var contatos 	= {};
 var salaStandBy = "STANDY_BY_BOT";
-var salaStandyIniciada = false;
 
-var loadSomeThing = false;
+var salaStandyIniciada = false;
+var loadSomeThing 	   = false;
 
 function simulateMouseEvents(element, eventName) {
     var mouseEvent = document.createEvent ('MouseEvents');
@@ -14,23 +14,30 @@ function simulateMouseEvents(element, eventName) {
 
 function checkAlive() {
 
-	
-	if(!salaStandyIniciada){
-		// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
-		if(!loadSomeThing){
-			loadSomeThing   = true;
-			var contactsDOM = loadContacts();
-			loadSomeThing   = false;
-		}
-		
-		// if(contactsDOM != null){
-		// 	console.log(contactsDOM);
-		// }
-	}else{
-		detectMsg();
-	}
-	
+	if(isLoaded()){
+		if(!salaStandyIniciada){
+			// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
+			if(!loadSomeThing){
+				loadSomeThing      = true;
+				loadContacts();
+				loadSomeThing      = false;
 
+				salaStandyIniciada = true;
+			}
+			
+			// if(contactsDOM != null){
+			// 	console.log(contactsDOM);
+			// }
+		}else{
+			detectMsg();
+		}
+	}
+
+}
+
+
+function isLoaded(){
+	return document.querySelector("#startup") != null ? true : false;
 }
 
 function selectPerfil(index){
@@ -115,6 +122,8 @@ function loadContacts(){
 		var name       = v.querySelectorAll("div > div > span")[1].textContent;
 		var dataultmsg = v.querySelectorAll("div > div > span")[2].textContent;
 		
+		console.log("###");
+
 		//CARREGA CONTATOS
 		var nomeContato = name;
 		if(!contatos.hasOwnProperty(name)){
@@ -122,10 +131,16 @@ function loadContacts(){
 			contatos[name].nome 	  = name;
 			contatos[name].dataUltMsg = dataultmsg;
 			contatos[name].conversas  = [];
-			console.log('atualizando contato',name,'last msg',dataultmsg);
+			
+			console.log($(v.querySelectorAll("div > div > span")[2])[0]);
+
+			simulateMouseEvents($(v.querySelectorAll("div > div > span")[2]), 'mousedown');
+
+			contatos[name].conversas = getConversations();
 		}
 	});
 
+	console.log('Contatos carregados',contatos);
 }
 
 function getConversations(){
