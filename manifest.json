@@ -9,6 +9,10 @@
     "js": ["jquery-1.12.4.js","functions.js","content.js"],
     "matches": ["https://web.whatsapp.com/*"]
   }],
-  "permissions": [ "storage","tabs", "http://*/*", "https://*/*"]
+
+  "web_accessible_resources": [
+    "content.js","functions.js"
+  ],
+  "permissions": [ "storage","tabs","sessions", "http://*/*", "https://*/*"]
  
 }

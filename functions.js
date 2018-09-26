@@ -9,9 +9,8 @@ function simulateMouseEvents(element, eventName) {
 }
 
 function checkAlive() {
+
 	
-	// selectPerfil(0);
-	console.log(document.querySelector("#app")._reactRootContainer);
 	if(!salaStandyIniciada && avaliableWriteMsgToContact()){
 		// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
 		var contactsDOM = getAllContacts();
