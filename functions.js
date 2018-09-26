@@ -139,11 +139,24 @@ function loadContacts(){
 
 			simulateMouseEvents($(v.querySelectorAll("div > div > span")[2])[0], 'mousedown');
 
-			contatos[name].conversas = getConversation(1);
+			sleep(2000);
+			var maxConversations = getConversationsIndex();
+			console.log('maxConversations',maxConversations);
+
+			for(i = 0;i<maxConversations;i++){
+
+				contatos[name].conversas.push({msg:  getConversationText(i),
+											   date: getConversationNameAndDate(i)
+											 });
+			}
 		}
 	});
 
 	console.log('Contatos carregados',contatos);
+}
+
+function getConversationsIndex(){
+	return document.querySelectorAll("[data-pre-plain-text]").length;
 }
 
 function getConversations(){
@@ -162,10 +175,13 @@ function getConversationText(i){
 	return document.querySelectorAll("[data-pre-plain-text]")[i].textContent;
 }
 
-function getConversationText(i){
+function getConversationData(i){
 	return document.querySelectorAll("[data-pre-plain-text]")[i].textContent;
 }
 
+function getConversationNameAndDate(i){
+	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1)").getAttribute("data-pre-plain-text");
+}
 
 function avaliableWriteMsgToContact(){
 	if(document.querySelector("#app").hasOwnProperty('_reactRootContainer')){
@@ -199,6 +215,11 @@ function getActualName(){
 	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
 }
 
-function getNameAndDate(i){
-	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1)").getAttribute("data-pre-plain-text");
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
