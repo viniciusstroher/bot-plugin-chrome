@@ -2,6 +2,8 @@ var contatos 	= {};
 var salaStandBy = "STANDY_BY_BOT";
 var salaStandyIniciada = false;
 
+var loadSomeThing = false;
+
 function simulateMouseEvents(element, eventName) {
     var mouseEvent = document.createEvent ('MouseEvents');
     mouseEvent.initEvent (eventName, true, true);
@@ -15,10 +17,15 @@ function checkAlive() {
 	
 	if(!salaStandyIniciada){
 		// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
-		var contactsDOM = loadContacts();
-		if(contactsDOM != null){
-			console.log(contactsDOM);
+		if(!loadSomeThing){
+			loadSomeThing   = true;
+			var contactsDOM = loadContacts();
+			loadSomeThing   = false;
 		}
+		
+		// if(contactsDOM != null){
+		// 	console.log(contactsDOM);
+		// }
 	}else{
 		detectMsg();
 	}
@@ -46,8 +53,8 @@ function write(){
 		textbox.textContent = 'Bot do demonio feito para plugin do chrome !!!!!';
 		textbox.dispatchEvent(event);
 	}
-	// $('[data-icon="send"]').trigger('click');
 
+	// $('[data-icon="send"]').trigger('click');
 	// $("[tabindex] div:eq(0)").trigger("click");
 }
 
@@ -70,9 +77,6 @@ function detectMsg(){
 				if(number > 0){
 					simulateMouseEvents($(v).find("img")[0], 'mousedown');
 
-
-					
-					
 					// console.log(number);
 					// getConversation(i)
 
