@@ -13,7 +13,7 @@ function simulateMouseEvents(element, eventName) {
 
 
 function checkAlive() {
-
+	
 	if(isLoaded()){
 		if(!salaStandyIniciada){
 			// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
@@ -31,6 +31,8 @@ function checkAlive() {
 		}else{
 			detectMsg();
 		}
+	}else{
+		console.log("Carregando whatzweb",isLoaded());
 	}
 
 }
