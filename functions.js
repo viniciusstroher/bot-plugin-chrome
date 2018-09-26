@@ -1,5 +1,9 @@
+var contatos 	= {};
+var salaStandBy = "STANDY_BY_BOT";
+var salaStandyIniciada = false;
+
 function simulateMouseEvents(element, eventName) {
-    var mouseEvent= document.createEvent ('MouseEvents');
+    var mouseEvent = document.createEvent ('MouseEvents');
     mouseEvent.initEvent (eventName, true, true);
     element.dispatchEvent (mouseEvent);
 }
@@ -7,7 +11,18 @@ function simulateMouseEvents(element, eventName) {
 function checkAlive() {
 	
 	// selectPerfil(0);
-	detectMsg()
+	console.log(document.querySelector("#app")._reactRootContainer);
+	if(!salaStandyIniciada && avaliableWriteMsgToContact()){
+		// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
+		var contactsDOM = getAllContacts();
+		console.log(contactsDOM);
+		if(contactsDOM != null){
+			console.log(contactsDOM);
+		}
+	}else{
+		detectMsg();
+	}
+	
 
 }
 
@@ -48,17 +63,34 @@ function detectMsg(){
 		$.each(contatosListDom,function(k,v){
 			var conversasNaoLidas = $(v).find("div > div:eq(3) > div:eq(1) > div:eq(1) span div span");
 			number = 0;
+
+
+
 			if(conversasNaoLidas.html()){
 				number = parseInt(conversasNaoLidas.html());
 
 				if(number > 0){
 					simulateMouseEvents($(v).find("img")[0], 'mousedown');
-					console.log(number);
+
+
+					//ATUALIZA CONTATOS
+					var nomeContato = getActualName();
+					if(!contatos.hasOwnProperty(nomeContato)){
+						contatos[nomeContato] 			= {};
+						contatos[nomeContato].conversas = [];
+						console.log('atualizando contato',nomeContato);
+					}
+					
+					// console.log(number);
+					// getConversation(i)
+
 				}
 			}
 		});
 		
-		
+		function getConversations(){
+			return document.querySelectorAll("[data-pre-plain-text]");
+		}
 		// console.log(contatosListDom);
 		// $(contatosListDom).each(function(){
 		// 	var dom =$(this).find("div:eq(1) div:eq(1) div:eq(1)");
@@ -69,10 +101,20 @@ function detectMsg(){
 	}
 }
 
+function getAllContacts(){
+	var contatosDom  	= document.querySelectorAll("[tabindex]")[2];
+	if(contatosDom != null){
+		//TROCAR PARA querySelectorAll ao invez de querySelector
+		// var contatosListDom   = contatosDom.querySelector("[tabindex]");
+		var contatosListDom   = contatosDom.querySelectorAll("[tabindex]");
+		return contatosListDom;
+	}
+	return null;
+}
+
 function getConversations(){
 	return document.querySelectorAll("[data-pre-plain-text]");
 }
-
 
 function getConversation(i){
 	return document.querySelectorAll("[data-pre-plain-text]")[i];
@@ -86,6 +128,13 @@ function getConversationText(i){
 	return document.querySelectorAll("[data-pre-plain-text]")[i].textContent;
 }
 
+
+function avaliableWriteMsgToContact(){
+	if(document.querySelector("#app").hasOwnProperty('_reactRootContainer')){
+		return true;
+	}
+	return false;
+}
 
 function writeMsgToContact(num,msg){
 	document.querySelector("#app")._reactRootContainer._internalRoot.current.child.child.child.child.child.child.sibling.sibling.
