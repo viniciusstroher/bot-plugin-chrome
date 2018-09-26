@@ -68,3 +68,37 @@ function detectMsg(){
 		// console.log(spansDom);
 	}
 }
+
+function getConversations(){
+	return document.querySelectorAll("[data-pre-plain-text]");
+}
+
+
+function getConversation(i){
+	return document.querySelectorAll("[data-pre-plain-text]")[i];
+}
+
+function getConversationText(i){
+	return document.querySelectorAll("[data-pre-plain-text]")[i].textContent;
+}
+
+function getConversationText(i){
+	return document.querySelectorAll("[data-pre-plain-text]")[i].textContent;
+}
+
+
+function writeMsgToContact(num,msg){
+	document.querySelector("#app")._reactRootContainer._internalRoot.current.child.child.child.child.child.child.sibling.sibling.
+sibling.sibling.sibling.child.child.child.child.child.sibling.sibling.sibling.sibling.sibling.child.
+child.child.child.memoizedState.chats[0].collection.find(num+"@c.us")
+.then(function(e) { e.sendMessage(msg) });
+
+}
+
+function getActualName(){
+	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
+}
+
+function getNameAndDate(i){
+	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1)").getAttribute("data-pre-plain-text");
+}
