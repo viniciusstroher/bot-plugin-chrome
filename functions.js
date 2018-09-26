@@ -12,18 +12,23 @@ function simulateMouseEvents(element, eventName) {
 
 
 
+//ID IMG 
+//#pane-side > div > div > div > div:nth-child(18) > div > div > div.dIyEr > div
+
 function checkAlive() {
 	
 	if(!isLoaded()){
 		if(!salaStandyIniciada){
 			// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
-			if(!loadSomeThing){
-				loadSomeThing      = true;
-				loadContacts();
-				loadSomeThing      = false;
+			// if(!loadSomeThing){
+			// 	loadSomeThing      = true;
+			// 	loadContacts();
+			// 	loadSomeThing      = false;
 
-				salaStandyIniciada = true;
-			}
+			// 	salaStandyIniciada = true;
+			// }
+
+			console.log();
 			
 			// if(contactsDOM != null){
 			// 	console.log(contactsDOM);
@@ -120,8 +125,10 @@ function getAllContacts(){
 function loadContacts(){
 	var c = getAllContacts();
 	
-	c = [c[0],c[1],c[2]];
-	sleep(500);
+	c = [c[0]];
+	
+	console.log(c);
+
 	$.each(c,function(k,v){
 		var name       = v.querySelectorAll("div > div > span")[1].textContent;
 		var dataultmsg = v.querySelectorAll("div > div > span")[2].textContent;
