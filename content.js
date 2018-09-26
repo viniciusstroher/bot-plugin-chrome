@@ -9,10 +9,6 @@ window.onload = function() {
 	  }
 	  setInterval(checkAlive,1000);
 	  
-	  
-	 
-
-
 	});
 }
 

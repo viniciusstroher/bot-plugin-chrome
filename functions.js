@@ -1,7 +1,6 @@
 var contatos 	= {};
 var salaStandBy = "STANDY_BY_BOT";
 var salaStandyIniciada = false;
-salaStandyIniciada 	   = true;
 
 function simulateMouseEvents(element, eventName) {
     var mouseEvent = document.createEvent ('MouseEvents');
@@ -9,15 +8,14 @@ function simulateMouseEvents(element, eventName) {
     element.dispatchEvent (mouseEvent);
 }
 
+
+
 function checkAlive() {
 
 	
 	if(!salaStandyIniciada){
 		// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
-		
-		var contactsDOM = getAllContacts();
-		console.log(contactsDOM);
-
+		var contactsDOM = loadContacts();
 		if(contactsDOM != null){
 			console.log(contactsDOM);
 		}
@@ -56,7 +54,7 @@ function write(){
 function detectMsg(){
 	var contatosDom  	= document.querySelectorAll("[tabindex]")[2];
 	if(contatosDom != null){
-								//TROCAR PARA querySelectorAll ao invez de querySelector
+		//TROCAR PARA querySelectorAll ao invez de querySelector
 		// var contatosListDom   = contatosDom.querySelector("[tabindex]");
 
 		var contatosListDom   = contatosDom.querySelectorAll("[tabindex]");
@@ -66,8 +64,6 @@ function detectMsg(){
 			var conversasNaoLidas = $(v).find("div > div:eq(3) > div:eq(1) > div:eq(1) span div span");
 			number = 0;
 
-
-
 			if(conversasNaoLidas.html()){
 				number = parseInt(conversasNaoLidas.html());
 
@@ -75,13 +71,7 @@ function detectMsg(){
 					simulateMouseEvents($(v).find("img")[0], 'mousedown');
 
 
-					//ATUALIZA CONTATOS
-					var nomeContato = getActualName();
-					if(!contatos.hasOwnProperty(nomeContato)){
-						contatos[nomeContato] 			= {};
-						contatos[nomeContato].conversas = [];
-						console.log('atualizando contato',nomeContato);
-					}
+					
 					
 					// console.log(number);
 					// getConversation(i)
@@ -112,6 +102,27 @@ function getAllContacts(){
 		return contatosListDom;
 	}
 	return null;
+}
+
+function loadContacts(){
+	var c = getAllContacts();
+	
+	$.each(c,function(k,v){
+		var name = v.querySelectorAll("div > div > span")[1].textContent;
+		
+		//CARREGA CONTATOS
+		var nomeContato = name;
+		if(!contatos.hasOwnProperty(name)){
+			contatos[name] 			 = {};
+			contatos[name].conversas = [];
+			console.log('atualizando contato',name);
+		}
+	});
+
+}
+
+function getConversations(){
+	return document.querySelectorAll("[data-pre-plain-text]");
 }
 
 function getConversations(){
