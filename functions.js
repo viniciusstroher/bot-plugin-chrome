@@ -110,8 +110,10 @@ function loadContacts(){
 	   	 		}
 	   	 		//PEGA CONVERSAS CONTATOS AQUI
 
-	   	 		var nomeContato = getActualName();
-	   	 		console.log(nomeContato);
+	   	 		var name = getActualName();
+
+	   	 		console.log('nomeContato',nomeContato);
+
 				if(!contatos.hasOwnProperty(name)){
 					contatos[name] 			  = {};
 					contatos[name].nome 	  = name;
@@ -132,7 +134,7 @@ function loadContacts(){
 		   	 	
 		   	}
 		   	//CUIDAR TEMPO DE RESPOSTA AUMENTAR SE PRECISO PARA EVITAR BAN
-	   },3000);
+	   },4000);
 	}
 
 	
