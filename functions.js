@@ -78,6 +78,12 @@ function loadContacts(){
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
 		var numeroContatos  = 3;
 		var ponteiroContato = 1;
+
+		if(numeroContatos == 0){
+			salaStandyIniciada  = true;
+			return;
+		}
+
 		console.log('numeroContatos',numeroContatos);
 
 		checkAliveThread = setInterval(function(){
@@ -88,7 +94,7 @@ function loadContacts(){
 		   	 	salaStandyIniciada  = true;
 		   	 	clearInterval(checkAliveThread);
 		   	 	checkAliveThread = null;
-
+		   	 	return;
 		   	}
 
 		   	//DPS DE CARREGAR
@@ -119,9 +125,10 @@ function loadContacts(){
 													   date: getConversationNameAndDate(i)
 													 });
 	   	 			}
+	   	 			
 	   	 		}
-
 	   	 		ponteiroContato++;
+	   	 		
 		   	 	
 		   	}
 		   	//CUIDAR TEMPO DE RESPOSTA AUMENTAR SE PRECISO PARA EVITAR BAN
