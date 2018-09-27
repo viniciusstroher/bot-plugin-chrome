@@ -114,7 +114,7 @@ function loadContacts(){
 
 	   	 		console.log('nomeContato',nomeContato);
 
-				if(!contatos.hasOwnProperty(name)){
+				if(!contatos.hasOwnProperty(name) && name != ""){
 					contatos[name] 			  = {};
 					contatos[name].nome 	  = name;
 					contatos[name].conversas  = [];
@@ -127,9 +127,10 @@ function loadContacts(){
 													   date: getConversationNameAndDate(i)
 													 });
 	   	 			}
-	   	 			
+	   	 		
+	   	 			ponteiroContato++;
 	   	 		}
-	   	 		ponteiroContato++;
+	   	 		
 	   	 		
 		   	 	
 		   	}
