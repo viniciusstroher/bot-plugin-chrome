@@ -14,7 +14,7 @@ function simulateMouseEvents(element, eventName) {
 
 //ID IMG 
 //#pane-side > div > div > div > div:nth-child(18) > div > div > div.dIyEr > div
-
+var checkAliveThread = null;
 function checkAlive() {
 	
 	if(!isLoaded()){
@@ -28,7 +28,37 @@ function checkAlive() {
 			// 	salaStandyIniciada = true;
 			// }
 
-			console.log();
+			// loadContacts();
+
+			//CARREGA CONTATOS NO START DA APLICAÇAO
+			salaStandyIniciada  = true;
+			if(checkAliveThread == null){
+				
+				var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
+				var ponteiroContato = 1;
+				console.log('numeroContatos',numeroContatos);
+
+				checkAliveThread = setInterval(function(){
+		   		
+				   	if(ponteiroContato == numeroContatos+1){
+				   	 	clearInterval(checkAliveThread);
+				   	 	checkAliveThread = null;
+				   	}
+
+				   	//DPS DE CARREGAR
+				   	if(!isLoaded()){
+				
+			   	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
+			   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
+			   	 		simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
+			   	 		//PEGA CONVERSAS CONTATOS AQUI
+
+			   	 		ponteiroContato++;
+				   	 	
+				   	}
+			   },1000);
+			}
+			
 			
 			// if(contactsDOM != null){
 			// 	console.log(contactsDOM);

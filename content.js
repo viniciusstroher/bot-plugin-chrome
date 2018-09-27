@@ -11,24 +11,24 @@ window.onload = function() {
 	  	console.log("STATUS OFF PLUGIN");
 	  	throw "plugin desabilitado";
 	  }
-	  // setInterval(checkAlive,2000);
+	  setInterval(checkAlive,2000);
 
-	   intervalo = setInterval(function(){
-	   		 console.log(p);
-		   	 if(p.length == 0){
-		   	 	clearInterval(intervalo);
-		   	 }
+	   // intervalo = setInterval(function(){
+	   // 		 console.log(p);
+		  //  	 if(p.length == 0){
+		  //  	 	clearInterval(intervalo);
+		  //  	 }
 
-		   	 if(!isLoaded()){
+		  //  	 if(!isLoaded()){
 		   	 	
-		   	 	p2 = p.pop();
-		   	 	if(p2 != null){
-		   	 		console.log(p2);
-		   	 		simulateMouseEvents(document.querySelector(p2), 'mousedown');
-		   	 	}
+		  //  	 	p2 = p.pop();
+		  //  	 	if(p2 != null){
+		  //  	 		console.log(p2);
+		  //  	 		simulateMouseEvents(document.querySelector(p2), 'mousedown');
+		  //  	 	}
 
-		   	 }
-		   },1000);
+		  //  	 }
+		  //  },1000);
 
 	});
 }
