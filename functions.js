@@ -2,7 +2,6 @@ var contatos 	= {};
 var salaStandBy = "STANDY_BY_BOT";
 
 var salaStandyIniciada = false;
-var loadSomeThing 	   = false;
 
 function simulateMouseEvents(element, eventName) {
     var mouseEvent = document.createEvent ('MouseEvents');
@@ -20,45 +19,10 @@ function checkAlive() {
 	if(!isLoaded()){
 		if(!salaStandyIniciada){
 			// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
-			// if(!loadSomeThing){
-			// 	loadSomeThing      = true;
-			// 	loadContacts();
-			// 	loadSomeThing      = false;
-
-			// 	salaStandyIniciada = true;
-			// }
-
-			// loadContacts();
-
-			//CARREGA CONTATOS NO START DA APLICAÇAO
-			salaStandyIniciada  = true;
-			if(checkAliveThread == null){
-				
-				var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
-				var ponteiroContato = 1;
-				console.log('numeroContatos',numeroContatos);
-
-				checkAliveThread = setInterval(function(){
-		   		
-				   	if(ponteiroContato == numeroContatos+1){
-				   	 	clearInterval(checkAliveThread);
-				   	 	checkAliveThread = null;
-				   	}
-
-				   	//DPS DE CARREGAR
-				   	if(!isLoaded()){
-				
-			   	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
-			   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
-			   	 		simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
-			   	 		//PEGA CONVERSAS CONTATOS AQUI
-
-			   	 		ponteiroContato++;
-				   	 	
-				   	}
-			   },1000);
-			}
 			
+			//CARREGA CONTATOS NO START DA APLICAÇAO
+			
+			loadContacts();
 			
 			// if(contactsDOM != null){
 			// 	console.log(contactsDOM);
@@ -128,9 +92,6 @@ function detectMsg(){
 			}
 		});
 		
-		function getConversations(){
-			return document.querySelectorAll("[data-pre-plain-text]");
-		}
 		// console.log(contatosListDom);
 		// $(contatosListDom).each(function(){
 		// 	var dom =$(this).find("div:eq(1) div:eq(1) div:eq(1)");
@@ -141,56 +102,61 @@ function detectMsg(){
 	}
 }
 
-function getAllContacts(){
-	var contatosDom  	= document.querySelectorAll("[tabindex]")[2];
-	if(contatosDom != null){
-		//TROCAR PARA querySelectorAll ao invez de querySelector
-		// var contatosListDom   = contatosDom.querySelector("[tabindex]");
-		var contatosListDom   = contatosDom.querySelectorAll("[tabindex]");
-		return contatosListDom;
-	}
-	return null;
-}
-
 function loadContacts(){
-	var c = getAllContacts();
+	if(checkAliveThread == null){
+				
+		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
+		var ponteiroContato = 1;
+		console.log('numeroContatos',numeroContatos);
+
+		checkAliveThread = setInterval(function(){
+   		
+		   	if(ponteiroContato == numeroContatos+1){
+		   	 	console.log('Contatos carregados',contatos);
+		   	 	//LIBERA A SALA PARA INICIAR O DETECT()
+		   	 	salaStandyIniciada  = true;
+		   	 	clearInterval(checkAliveThread);
+		   	 	checkAliveThread = null;
+
+		   	}
+
+		   	//DPS DE CARREGAR
+		   	if(!isLoaded()){
+				//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO
+	   	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
+	   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
+	   	 		
+	   	 		try{
+	   	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
+	   	 		}catch(ex){
+	   	 			console.log('loadContacts simulateMouseEvents ',ex);
+	   	 		}
+	   	 		//PEGA CONVERSAS CONTATOS AQUI
+
+	   	 		var nomeContato = getActualName();
+				if(!contatos.hasOwnProperty(name)){
+					contatos[name] 			  = {};
+					contatos[name].nome 	  = name;
+					contatos[name].conversas  = [];
+
+					var maxConversations = getConversationsIndex();
+
+					for(i = 0;i<maxConversations;i++){
+
+						contatos[name].conversas.push({msg:  getConversationText(i),
+													   date: getConversationNameAndDate(i)
+													 });
+	   	 			}
+	   	 		}
+
+	   	 		ponteiroContato++;
+		   	 	
+		   	}
+		   	//CUIDAR TEMPO DE RESPOSTA AUMENTAR SE PRECISO PARA EVITAR BAN
+	   },1000);
+	}
+
 	
-	c = [c[0]];
-	
-	console.log(c);
-
-	$.each(c,function(k,v){
-		var name       = v.querySelectorAll("div > div > span")[1].textContent;
-		var dataultmsg = v.querySelectorAll("div > div > span")[2].textContent;
-		
-		console.log("###");
-
-		//CARREGA CONTATOS
-		var nomeContato = name;
-		if(!contatos.hasOwnProperty(name)){
-			contatos[name] 			  = {};
-			contatos[name].nome 	  = name;
-			contatos[name].dataUltMsg = dataultmsg;
-			contatos[name].conversas  = [];
-
-
-			simulateMouseEvents($(v.querySelectorAll("div > div"))[0], 'mousedown');
-			console.log("start");
-			
-			var maxConversations = getConversationsIndex();
-			console.log('maxConversations',maxConversations);
-
-			for(i = 0;i<maxConversations;i++){
-
-				contatos[name].conversas.push({msg:  getConversationText(i),
-											   date: getConversationNameAndDate(i)
-											 });
-			}
-			sleep(1000);
-		}
-	});
-
-	console.log('Contatos carregados',contatos);
 }
 
 function getConversationsIndex(){
@@ -219,21 +185,6 @@ function getConversationData(i){
 
 function getConversationNameAndDate(i){
 	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1)").getAttribute("data-pre-plain-text");
-}
-
-function avaliableWriteMsgToContact(){
-	if(document.querySelector("#app").hasOwnProperty('_reactRootContainer')){
-		return true;
-	}
-	return false;
-}
-
-function writeMsgToContact(num,msg){
-	document.querySelector("#app")._reactRootContainer._internalRoot.current.child.child.child.child.child.child.sibling.sibling.
-sibling.sibling.sibling.child.child.child.child.child.sibling.sibling.sibling.sibling.sibling.child.
-child.child.child.memoizedState.chats[0].collection.find(num+"@c.us")
-.then(function(e) { e.sendMessage(msg) });
-
 }
 
 function write(num,msg){
