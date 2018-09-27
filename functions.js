@@ -4,7 +4,7 @@ var salaStandBy = "STANDY_BY_BOT";
 var salaStandyIniciada = false;
 
 function simulateMouseEvents(element, eventName) {
-	if(document.querySelector(domSearch) != null){
+	if($(element).length > 0){
 	    var mouseEvent = document.createEvent ('MouseEvents');
 	    mouseEvent.initEvent (eventName, true, true);
 	    element.dispatchEvent (mouseEvent);
@@ -20,15 +20,8 @@ function checkAlive() {
 	
 	if(!isLoaded()){
 		if(!salaStandyIniciada){
-			// writeMsgToContact("5551995412459","#-SALA STANDY BY DO BOT-#");
-			
 			//CARREGA CONTATOS NO START DA APLICAÇAO
-			
 			loadContacts();
-			
-			// if(contactsDOM != null){
-			// 	console.log(contactsDOM);
-			// }
 		}else{
 			detectMsg();
 		}
@@ -83,6 +76,7 @@ function loadContacts(){
 	if(checkAliveThread == null){
 				
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
+		var numeroContatos  = 3;
 		var ponteiroContato = 1;
 		console.log('numeroContatos',numeroContatos);
 
@@ -104,7 +98,6 @@ function loadContacts(){
 	   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
 	   	 		
 	   	 		try{
-
 	   	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
 	   	 		}catch(ex){
 	   	 			console.log('loadContacts simulateMouseEvents ',ex);
@@ -112,6 +105,7 @@ function loadContacts(){
 	   	 		//PEGA CONVERSAS CONTATOS AQUI
 
 	   	 		var nomeContato = getActualName();
+	   	 		console.log(nomeContato);
 				if(!contatos.hasOwnProperty(name)){
 					contatos[name] 			  = {};
 					contatos[name].nome 	  = name;
