@@ -4,9 +4,11 @@ var salaStandBy = "STANDY_BY_BOT";
 var salaStandyIniciada = false;
 
 function simulateMouseEvents(element, eventName) {
-    var mouseEvent = document.createEvent ('MouseEvents');
-    mouseEvent.initEvent (eventName, true, true);
-    element.dispatchEvent (mouseEvent);
+	if(document.querySelector(domSearch) != null){
+	    var mouseEvent = document.createEvent ('MouseEvents');
+	    mouseEvent.initEvent (eventName, true, true);
+	    element.dispatchEvent (mouseEvent);
+	}
 }
 
 
@@ -39,31 +41,6 @@ function checkAlive() {
 
 function isLoaded(){
 	return document.querySelector("#startup") != null ? true : false;
-}
-
-function selectPerfil(index){
-	var contatosDom = document.querySelectorAll("[tabindex]")[2];
-	var imgDom 	    = $(contatosDom).find("img")[index];
-	
-	if(contatosDom){
-		if(imgDom != null){
-			simulateMouseEvents(imgDom, 'mousedown');
-			write();
-		}
-	}
-}
-
-function write(){
-	var event   = new InputEvent('input', {bubbles: true});
-	var textbox = document.querySelector('.selectable-text[spellcheck]');
-
-	if(textbox != null){
-		textbox.textContent = 'Bot do demonio feito para plugin do chrome !!!!!';
-		textbox.dispatchEvent(event);
-	}
-
-	// $('[data-icon="send"]').trigger('click');
-	// $("[tabindex] div:eq(0)").trigger("click");
 }
 
 function detectMsg(){
@@ -127,6 +104,7 @@ function loadContacts(){
 	   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
 	   	 		
 	   	 		try{
+
 	   	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
 	   	 		}catch(ex){
 	   	 			console.log('loadContacts simulateMouseEvents ',ex);
@@ -153,7 +131,7 @@ function loadContacts(){
 		   	 	
 		   	}
 		   	//CUIDAR TEMPO DE RESPOSTA AUMENTAR SE PRECISO PARA EVITAR BAN
-	   },1000);
+	   },3000);
 	}
 
 	
@@ -201,6 +179,7 @@ function write(num,msg){
 
 
 function getActualName(){
+
 	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
 }
 
