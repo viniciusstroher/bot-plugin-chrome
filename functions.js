@@ -112,7 +112,7 @@ function loadContacts(){
 
 	   	 		var name = getActualName();
 
-	   	 		console.log('nomeContato',nomeContato);
+	   	 		console.log('nomeContato',name);
 
 				if(!contatos.hasOwnProperty(name) && name != ""){
 					contatos[name] 			  = {};
