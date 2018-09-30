@@ -194,6 +194,11 @@ function getConversationNameAndDate(i){
 	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
 }
 
+function getConversationTextAudioImg(){
+	return document.querySelectorAll("[data-pre-plain-text], .message-in ")[i]
+	//.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
+}
+
 function getActualName(){
 	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
 }
