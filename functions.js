@@ -129,9 +129,20 @@ function loadContacts(){
 					var maxConversations = getConversationsIndex();
 
 					for(i = 0;i<maxConversations;i++){
+						//PEGA DATA
+						dateWithName    = getConversationNameAndDate(i);
+						dateWithoutName = dateWithName.match("\\[[^\\]]*]");
 
+						dateConversation = null;
+						if(dateWithName != null){
+							isDate = dateWithName[0].split(", ");
+							if(isDate.length > 0){
+								dateConversation= new Date(isDate[1]+" "+isDate[0]);
+							}
+						}
+						//PEGA DATA
 						contatos[name].conversas.push({msg:  getConversationText(i),
-													   date: getConversationNameAndDate(i)
+													   date: dateConversation
 													 });
 	   	 			}
 	   	 		
