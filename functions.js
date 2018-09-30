@@ -201,7 +201,7 @@ function getConversationNameAndDate(i){
 function getConversationsIndex(){
 	// audio -> .message-in > input[type=range] ~ audio - pega o irmao audio de inpút type=range 
 	// apenas imagem q tem blob: no incio do src sao os ativos de imagens mandados por usuario 
-	return document.querySelectorAll(".message-in [data-pre-plain-text], .message-in img[src*=blob:], .message-in input[type=range] ~ audio");
+	return document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio");
 }
 
 
@@ -209,18 +209,17 @@ function getConversationTextAudioImgAndData(i){
 	//PEGAR DATA TB AQUI
 
 	var obj = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];
-
-	// console.log(obj);
-
-	// if(obj.tagName == "img" || obj.tagName == "audio" ){
-	//  	data = obj.src;
-	// }else{
-	//  	data = obj.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text").textContent;
-	// }
+	if(obj.tagName == "img" || obj.tagName == "audio" ){
+	  	data = obj.src;
+	  	//pegar a data da img e audio aqui
+	}else{
+	 	data = obj.textContent;
+	 	//pegar data da msg aqui
+	}
 	
 	console.log(data);
 
-	// return obj;
+	return {data:data,date:};
 	
 }
 
