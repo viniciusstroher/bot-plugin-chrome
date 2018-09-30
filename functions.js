@@ -147,7 +147,10 @@ function loadContacts(){
 								}
 							}
 						}
+
+						console.log(getConversationTextAudioImg(i));
 						//PEGA DATA
+						//DEIXA O METODO PEGANDO TEXT-AUDIO-IMG ea data
 						contatos[name].conversas.push({msg:  getConversationText(i),
 													   date: dateConversation
 													 });
@@ -194,9 +197,31 @@ function getConversationNameAndDate(i){
 	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
 }
 
-function getConversationTextAudioImg(){
-	return document.querySelectorAll("[data-pre-plain-text], .message-in ")[i]
-	//.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
+
+function getConversationsIndex(){
+	// audio -> .message-in > input[type=range] ~ audio - pega o irmao audio de inpút type=range 
+	// apenas imagem q tem blob: no incio do src sao os ativos de imagens mandados por usuario 
+	return document.querySelectorAll(".message-in [data-pre-plain-text], .message-in img[src*=blob:], .message-in input[type=range] ~ audio");
+}
+
+
+function getConversationTextAudioImgAndData(i){
+	//PEGAR DATA TB AQUI
+
+	var obj = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];
+
+	// console.log(obj);
+
+	// if(obj.tagName == "img" || obj.tagName == "audio" ){
+	//  	data = obj.src;
+	// }else{
+	//  	data = obj.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text").textContent;
+	// }
+	
+	console.log(data);
+
+	// return obj;
+	
 }
 
 function getActualName(){
