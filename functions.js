@@ -99,9 +99,10 @@ function loadContacts(){
 
 		   	//DPS DE CARREGAR
 		   	if(!isLoaded()){
+		   		console.log("Contatos "+ponteiroContato+" de "+numeroContatos);
 				//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO
 	   	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
-	   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
+	   	 		// console.log('domSearch',domSearch,document.querySelector(domSearch));
 	   	 		
 	   	 		try{
 	   	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
