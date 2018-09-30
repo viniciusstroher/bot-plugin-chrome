@@ -208,18 +208,20 @@ function getConversationsIndex(){
 function getConversationTextAudioImgAndData(i){
 	//PEGAR DATA TB AQUI
 
-	var obj = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];
+	var obj  = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];
+	var date = null;
 	if(obj.tagName == "img" || obj.tagName == "audio" ){
 	  	data = obj.src;
 	  	//pegar a data da img e audio aqui
 	}else{
 	 	data = obj.textContent;
+	 	
 	 	//pegar data da msg aqui
 	}
 	
 	console.log(data);
 
-	return {data:data,date:};
+	return {data:data,date:date};
 	
 }
 
