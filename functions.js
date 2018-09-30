@@ -76,7 +76,7 @@ function loadContacts(){
 	if(checkAliveThread == null){
 				
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
-		// var numeroContatos  = 3;
+		var numeroContatos  = 1;
 		var ponteiroContato = 1;
 
 		if(numeroContatos == 0){
@@ -87,8 +87,8 @@ function loadContacts(){
 		console.log('numeroContatos',numeroContatos);
 
 		checkAliveThread = setInterval(function(){
-   		
-		   	if(ponteiroContato == numeroContatos){
+   			//+1 por causa que o nth-child recisa sair em +1
+		   	if(ponteiroContato == numeroContatos+1){
 		   	 	console.log('Contatos carregados',contatos);
 		   	 	//LIBERA A SALA PARA INICIAR O DETECT()
 		   	 	salaStandyIniciada  = true;
@@ -102,7 +102,7 @@ function loadContacts(){
 		   		console.log("Contatos "+ponteiroContato+" de "+numeroContatos);
 				//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO
 	   	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
-	   	 		// console.log('domSearch',domSearch,document.querySelector(domSearch));
+	   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
 	   	 		
 	   	 		try{
 	   	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
@@ -131,14 +131,20 @@ function loadContacts(){
 
 					for(i = 0;i<maxConversations;i++){
 						//PEGA DATA
-						dateWithName    = getConversationNameAndDate(i);
-						dateWithoutName = dateWithName.match("\\[[^\\]]*]");
-
+						dateWithName     = getConversationNameAndDate(i);
+						console.log('dateWithName',maxConversations,i,dateWithName);
 						dateConversation = null;
 						if(dateWithName != null){
-							isDate = dateWithName[0].split(", ");
-							if(isDate.length > 0){
-								dateConversation= new Date(isDate[1]+" "+isDate[0]);
+							dateWithoutName = dateWithName.match("\\[[^\\]]*]");
+
+							dateConversation = null;
+							if(dateWithoutName != null){
+								
+								isDate = dateWithoutName[0].substring(1,dateWithoutName[0].length-1).split(", ");
+								console.log(isDate);
+								if(isDate.length > 0){
+									dateConversation = new Date(isDate[1].split("/").reverse().join("-")+" "+isDate[0]);
+								}
 							}
 						}
 						//PEGA DATA
@@ -185,7 +191,11 @@ function getConversationData(i){
 }
 
 function getConversationNameAndDate(i){
-	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1)").getAttribute("data-pre-plain-text");
+	return document.querySelectorAll("[data-pre-plain-text]")[i].parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
+}
+
+function getActualName(){
+	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
 }
 
 function write(num,msg){
@@ -200,17 +210,3 @@ function write(num,msg){
   
 }
 
-
-function getActualName(){
-
-	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
-}
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
