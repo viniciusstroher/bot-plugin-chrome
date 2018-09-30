@@ -76,7 +76,7 @@ function loadContacts(){
 	if(checkAliveThread == null){
 				
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
-		var numeroContatos  = 3;
+		// var numeroContatos  = 3;
 		var ponteiroContato = 1;
 
 		if(numeroContatos == 0){
@@ -115,6 +115,13 @@ function loadContacts(){
 	   	 		console.log('nomeContato',name);
 
 				if(!contatos.hasOwnProperty(name) && name != ""){
+					$.toast({
+					    heading: 'Information',
+					    text: 'Carregando '+name,
+					    icon: 'info',
+					    loader: true,        // Change it to false to disable loader
+					    loaderBg: '#9EC600'  // To change the background
+					})
 					contatos[name] 			  = {};
 					contatos[name].nome 	  = name;
 					contatos[name].conversas  = [];
