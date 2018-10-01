@@ -169,10 +169,6 @@ function loadContacts(){
 	
 }
 
-function getConversationsIndex(){
-	return document.querySelectorAll("[data-pre-plain-text]").length;
-}
-
 function getConversations(){
 	return document.querySelectorAll("[data-pre-plain-text]");
 }
@@ -201,7 +197,7 @@ function getConversationNameAndDate(i){
 function getConversationsIndex(){
 	// audio -> .message-in > input[type=range] ~ audio - pega o irmao audio de inpút type=range 
 	// apenas imagem q tem blob: no incio do src sao os ativos de imagens mandados por usuario 
-	return document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio");
+	return document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio").length;
 }
 
 
@@ -226,7 +222,11 @@ function getConversationTextAudioImgAndData(i){
 }
 
 function getActualName(){
-	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent
+	if(document.querySelectorAll("#main header div:nth-child(2) div") == null){
+		return null;
+	}
+	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent;
+	
 }
 
 function write(num,msg){
