@@ -76,7 +76,7 @@ function loadContacts(){
 	if(checkAliveThread == null){
 				
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
-		var numeroContatos  = 1;
+		// var numeroContatos  = 1;
 		// var ponteiroContato = 1;
 		var ponteiroContato = 1;
 
