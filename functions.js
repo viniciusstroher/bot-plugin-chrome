@@ -11,6 +11,12 @@ function simulateMouseEvents(element, eventName) {
 	}
 }
 
+function mobileNotOnline(){
+	alert = $("[data-animate-modal-body='true'] div:contains(Tentando conectar ao celular)").length;
+	if(alert.length > 0){
+		//CELULAR OFFLINE !!!!!!!!!
+	}
+}
 
 
 //ID IMG 
