@@ -184,7 +184,10 @@ function getConversation(i){
 
 	var obj  = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];
 	var date = null;
-	if(obj.tagName == "img" || obj.tagName == "audio" ){
+	//tagname nao funciona
+	console.log(obj.tagName,obj);
+
+	if(obj.tagName == "IMG" || obj.tagName == "AUDIO" ){
 		//carregar ajax obj.src e pegar o blob e salvar
 	  	data = obj.src;
 
@@ -200,8 +203,7 @@ function getConversation(i){
 	 	//pegar data da msg aqui
 	}
 	
-	console.log(obj.tagName,obj,data);
-
+	
 	return {data:data,date:date};
 	
 }
