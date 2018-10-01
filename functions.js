@@ -208,6 +208,11 @@ function getActualName(){
 	if(document.querySelectorAll("#main header div:nth-child(2) div") == null){
 		return null;
 	}
+
+	if(document.querySelectorAll("#main header div:nth-child(2) div")[1] == undefined){
+		return null;
+	}
+	
 	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent;
 	
 }
