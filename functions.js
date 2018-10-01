@@ -191,14 +191,16 @@ function getConversation(i){
 
 	  	//pegar a data da img e audio aqui
 	}else{
+		console.log(obj,obj.parentElement);
 	 	data = obj.textContent;
 	 	
 	 	date = obj.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
 	  	date = parseDate(date);
+
 	 	//pegar data da msg aqui
 	}
 	
-	console.log(obj,data);
+	console.log(obj.tagName,obj,data);
 
 	return {data:data,date:date};
 	
@@ -212,7 +214,7 @@ function getActualName(){
 	if(document.querySelectorAll("#main header div:nth-child(2) div")[1] == undefined){
 		return null;
 	}
-	
+
 	return document.querySelectorAll("#main header div:nth-child(2) div")[1].textContent;
 	
 }
