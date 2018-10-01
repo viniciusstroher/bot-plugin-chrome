@@ -76,8 +76,9 @@ function loadContacts(){
 	if(checkAliveThread == null){
 				
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
-		var numeroContatos  = 1;
-		var ponteiroContato = 1;
+		var numeroContatos  = 16;
+		// var ponteiroContato = 1;
+		var ponteiroContato = 16;
 
 		if(numeroContatos == 0){
 			salaStandyIniciada  = true;
@@ -205,14 +206,18 @@ function getConversation(i){
 	var date = null;
 	if(obj.tagName == "img" || obj.tagName == "audio" ){
 	  	data = obj.src;
+
+
 	  	//pegar a data da img e audio aqui
 	}else{
 	 	data = obj.textContent;
 	 	
+	 	date = obj.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
+	  	date = parseDate(date);
 	 	//pegar data da msg aqui
 	}
 	
-	console.log(data);
+	console.log(obj,data);
 
 	return {data:data,date:date};
 	
@@ -236,5 +241,24 @@ function write(num,msg){
 		console.log("RUN");
 	},10000);
   
+}
+
+
+function parseDate(dateWithName){
+	dateConversation = null;
+	if(dateWithName != null){
+		dateWithoutName = dateWithName.match("\\[[^\\]]*]");
+
+		dateConversation = null;
+		if(dateWithoutName != null){
+			
+			isDate = dateWithoutName[0].substring(1,dateWithoutName[0].length-1).split(", ");
+			console.log(isDate);
+			if(isDate.length > 0){
+				dateConversation = new Date(isDate[1].split("/").reverse().join("-")+" "+isDate[0]);
+			}
+		}
+	}
+	return dateConversation;
 }
 
