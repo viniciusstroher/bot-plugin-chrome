@@ -95,7 +95,7 @@ function loadContacts(){
 
 		checkAliveThread = setInterval(function(){
    			//+1 por causa que o nth-child recisa sair em +1
-		   	if(ponteiroContato == numeroContatos+1){
+		   	if(ponteiroContato == numeroContatos){
 		   	 	console.log('Contatos carregados',contatos);
 		   	 	//LIBERA A SALA PARA INICIAR O DETECT()
 		   	 	salaStandyIniciada  = true;
