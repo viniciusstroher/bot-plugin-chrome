@@ -131,29 +131,26 @@ function loadContacts(){
 
 					for(i = 0;i<maxConversations;i++){
 						//PEGA DATA
-						dateWithName     = getConversationNameAndDate(i);
-						console.log('dateWithName',maxConversations,i,dateWithName);
-						dateConversation = null;
-						if(dateWithName != null){
-							dateWithoutName = dateWithName.match("\\[[^\\]]*]");
+						// dateWithName     = getConversationNameAndDate(i);
+						// console.log('dateWithName',maxConversations,i,dateWithName);
+						// dateConversation = null;
+						// if(dateWithName != null){
+						// 	dateWithoutName = dateWithName.match("\\[[^\\]]*]");
 
-							dateConversation = null;
-							if(dateWithoutName != null){
+						// 	dateConversation = null;
+						// 	if(dateWithoutName != null){
 								
-								isDate = dateWithoutName[0].substring(1,dateWithoutName[0].length-1).split(", ");
-								console.log(isDate);
-								if(isDate.length > 0){
-									dateConversation = new Date(isDate[1].split("/").reverse().join("-")+" "+isDate[0]);
-								}
-							}
-						}
+						// 		isDate = dateWithoutName[0].substring(1,dateWithoutName[0].length-1).split(", ");
+						// 		console.log(isDate);
+						// 		if(isDate.length > 0){
+						// 			dateConversation = new Date(isDate[1].split("/").reverse().join("-")+" "+isDate[0]);
+						// 		}
+						// 	}
+						// }
 
-						console.log(getConversationTextAudioImg(i));
 						//PEGA DATA
 						//DEIXA O METODO PEGANDO TEXT-AUDIO-IMG ea data
-						contatos[name].conversas.push({msg:  getConversationText(i),
-													   date: dateConversation
-													 });
+						contatos[name].conversas.push(getConversation(i));
 	   	 			}
 	   	 		
 	   	 			ponteiroContato++;
@@ -201,7 +198,7 @@ function getConversationsIndex(){
 }
 
 
-function getConversationTextAudioImgAndData(i){
+function getConversation(i){
 	//PEGAR DATA TB AQUI
 
 	var obj  = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];
