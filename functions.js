@@ -137,7 +137,7 @@ function loadContacts(){
 					var maxConversations = getConversationsIndex();
 
 					for(i = 0;i<maxConversations;i++){
-						contatos[name].conversas.push(getConversation(i));
+						contatos[name].conversas.push(getConversation(i,name));
 	   	 			}
 	   	 		
 	   	 			ponteiroContato++;
@@ -185,7 +185,7 @@ function getConversationsIndex(){
 }
 
 
-function getConversation(i){
+function getConversation(i,name){
 	//PEGAR DATA TB AQUI
 
 	var obj  = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];
@@ -196,6 +196,9 @@ function getConversation(i){
 	if(obj.tagName == "IMG" || obj.tagName == "AUDIO" ){
 		//carregar ajax obj.src e pegar o blob e salvar
 	  	data = obj.src;
+	  	// ,filename:name+ https://developer.chrome.com/extensions/downloads
+	  	//manda para o bg
+	  	chrome.runtime.sendMessage({url: obj.src});
 
 
 	  	//pegar a data da img e audio aqui

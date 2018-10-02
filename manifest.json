@@ -13,6 +13,9 @@
   "web_accessible_resources": [
     "content.js","functions.js"
   ],
-  "permissions": [ "storage","tabs","sessions", "http://*/*", "https://*/*"]
+  "background": {
+    "page": "bg.html"
+  },
+  "permissions": [ "background","downloads", "storage","tabs","sessions", "http://*/*", "https://*/*"]
  
 }
