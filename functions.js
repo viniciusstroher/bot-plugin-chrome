@@ -122,7 +122,7 @@ function loadContacts(){
 
 	   	 		console.log('nomeContato',name);
 
-				if(!contatos.hasOwnProperty(name) && name != ""){
+				if(!contatos.hasOwnProperty(name) && name != "" && name != null){
 					$.toast({
 					    heading: 'Information',
 					    text: 'Carregando '+name,
@@ -201,7 +201,13 @@ function getConversation(i){
 	  	//pegar a data da img e audio aqui
 	}else{
 		console.log(obj,obj.parentElement);
-	 	data = obj.textContent;
+	 	
+	 	//SE TIVER EMOJIS 
+	 	if(obj.querySelectorAll("img").length > 0){
+	 		data = obj;
+	 	}else{
+	 		data = obj.textContent;
+	 	}
 	 	
 	 	date = obj.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
 	  	date = parseDate(date);
