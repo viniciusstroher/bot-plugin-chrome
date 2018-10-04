@@ -1,5 +1,21 @@
 <html>
-	<head><title>OPTIONS</title></head>
+	<head>
+		<title>OPTIONS</title>
+		<script src="options.js"></script>
+		<script src="functions.js"></script>
+		<script type="text/javascript">
+			function conversation(){
+				console.log("####");
+			// 	alert("###");
+			// 	ponteiroContato=document.querySelector('[name=indexCovnersation]').value;
+			// 	console.log(ponteiroContato);
+			// 	fillContactIndex();
+			}
+			document.getElementById('conversation').addEventListener('click',conversation);
+		</script>
+		
+	</head>
+
 	<body>
 
 		<h2>Status:</h2>
@@ -12,6 +28,14 @@
 		<br/>
 		<button id="save">Save</button>
 
-		<script src="options.js"></script>
+
+		<br/>
+		<br/>
+		<input type="text" id="conversation" name="indexCovnersation" placeholder="Digite o indice da conversa"/>
+		<br/>
+		<button onclick="conversation()">Get Conversations</button>
+
+		
+		
 	</body>
 </html>

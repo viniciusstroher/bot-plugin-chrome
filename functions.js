@@ -85,20 +85,20 @@ function detectMsg(){
 	}
 }
 
+var ponteiroContato = 1;
 function loadContacts(){
 	if(checkAliveThread == null){
 				
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
 		// var numeroContatos  = 1;
 		// var ponteiroContato = 1;
-		var ponteiroContato = 1;
-
 		if(numeroContatos == 0){
 			salaStandyIniciada  = true;
 			return;
 		}
 
 		console.log('numeroContatos',numeroContatos);
+		console.log('ponteiroContato',ponteiroContato);
 
 		checkAliveThread = setInterval(function(){
    			//+1 por causa que o nth-child recisa sair em +1
@@ -111,53 +111,58 @@ function loadContacts(){
 		   	 	return;
 		   	}
 
-		   	//DPS DE CARREGAR
-		   	if(!isLoaded()){
-		   		console.log("Contatos "+ponteiroContato+" de "+numeroContatos);
-				//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO
-	   	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
-	   	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
-	   	 		
-	   	 		try{
-	   	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
-	   	 		}catch(ex){
-	   	 			console.log('loadContacts simulateMouseEvents ',ex);
-	   	 		}
-	   	 		//PEGA CONVERSAS CONTATOS AQUI
-
-	   	 		var name = getActualName();
-
-	   	 		console.log('nomeContato',name);
-
-				if(!contatos.hasOwnProperty(name) && name != "" && name != null){
-					$.toast({
-					    heading: 'Information',
-					    text: 'Carregando '+name,
-					    icon: 'info',
-					    loader: true,        // Change it to false to disable loader
-					    loaderBg: '#9EC600'  // To change the background
-					})
-					contatos[name] 			  = {};
-					contatos[name].nome 	  = name;
-					contatos[name].conversas  = [];
-
-					var maxConversations = getConversationsIndex();
-
-					for(i = 0;i<maxConversations;i++){
-						contatos[name].conversas.push(getConversation(i,name));
-	   	 			}
-	   	 		
-	   	 			ponteiroContato++;
-	   	 		}
-	   	 		
-	   	 		
-		   	 	
-		   	}
+		   	console.log("Contatos "+ponteiroContato+" de "+numeroContatos);
+		   	fillContactIndex();
 		   	//CUIDAR TEMPO DE RESPOSTA AUMENTAR SE PRECISO PARA EVITAR BAN
 	   },4000);
 	}
 
 	
+}
+
+
+
+function fillContactIndex(){
+	//DPS DE CARREGAR
+   	if(!isLoaded()){
+   		console.log('ponteiroContato',ponteiroContato);
+		//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO
+	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
+	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
+	 		
+	 		try{
+	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
+	 		}catch(ex){
+	 			console.log('loadContacts simulateMouseEvents ',ex);
+	 		}
+	 		//PEGA CONVERSAS CONTATOS AQUI
+
+	 		var name = getActualName();
+
+	 		console.log('nomeContato',name);
+
+		if(!contatos.hasOwnProperty(name) && name != "" && name != null){
+			$.toast({
+			    heading: 'Information',
+			    text: 'Carregando '+name,
+			    icon: 'info',
+			    loader: true,        // Change it to false to disable loader
+			    loaderBg: '#9EC600'  // To change the background
+			})
+			contatos[name] 			  = {};
+			contatos[name].nome 	  = name;
+			contatos[name].conversas  = [];
+
+			var maxConversations = getConversationsIndex();
+
+			for(i = 0;i<maxConversations;i++){
+				contatos[name].conversas.push(getConversation(i,name));
+ 			}
+	 		
+ 			ponteiroContato++;
+ 		}
+
+   	}
 }
 
 function getConversations(){
@@ -205,7 +210,7 @@ function getConversation(i,name){
 	  	data = obj.src;
 	  	// ,filename:name+ https://developer.chrome.com/extensions/downloads
 	  	//manda para o bg
-	  	chrome.runtime.sendMessage({url: obj.src});
+	  	// chrome.runtime.sendMessage({url: obj.src});
 
 
 	  	//pegar a data da img e audio aqui
