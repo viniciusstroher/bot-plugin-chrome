@@ -23,17 +23,24 @@ function mobileNotOnline(){
 //#pane-side > div > div > div > div:nth-child(18) > div > div > div.dIyEr > div
 var checkAliveThread = null;
 function checkAlive() {
-	
-	if(!isLoaded()){
-		if(!salaStandyIniciada){
-			//CARREGA CONTATOS NO START DA APLICAÇAO
-			loadContacts();
+	chrome.storage.sync.get(['status'], function(items) {
+	  if(!items.status || items.status == "false"){
+
+	  }else{
+	  	if(!isLoaded()){
+			if(!salaStandyIniciada){
+				//CARREGA CONTATOS NO START DA APLICAÇAO
+				loadContacts();
+			}else{
+				detectMsg();
+			}
 		}else{
-			detectMsg();
+			console.log("Carregando whatzweb",isLoaded());
 		}
-	}else{
-		console.log("Carregando whatzweb",isLoaded());
-	}
+	  }
+
+	});
+	
 
 }
 

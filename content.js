@@ -6,13 +6,12 @@ window.onload = function() {
 
 	console.log(pluginName);
 
-	chrome.storage.sync.get(['status'], function(items) {
-	  if(!items.status || items.status == "false"){
-	  	console.log("STATUS OFF PLUGIN");
-	  	throw "plugin desabilitado";
-	  }
-	  setInterval(checkAlive,2000);
-
+	// chrome.storage.sync.get(['status'], function(items) {
+	//   if(!items.status || items.status == "false"){
+	//   	console.log("STATUS OFF PLUGIN");
+	//   	throw "plugin desabilitado";
+	//   }
+	setInterval(checkAlive,2000);
 	   // intervalo = setInterval(function(){
 	   // 		 console.log(p);
 		  //  	 if(p.length == 0){
@@ -30,7 +29,7 @@ window.onload = function() {
 		  //  	 }
 		  //  },1000);
 
-	});
+	// });
 }
 
 

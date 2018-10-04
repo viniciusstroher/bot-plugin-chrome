@@ -13,9 +13,16 @@
   "web_accessible_resources": [
     "content.js","functions.js"
   ],
-  "background": {
-    "page": "bg.html"
+  // "background": {
+  //   "page": "bg.html"
+  // },
+
+
+  "browser_action": {
+      "default_icon": "icon.png",
+      "default_popup": "menu.html"
   },
+
   "permissions": [ "background","downloads", "storage","tabs","sessions", "http://*/*", "https://*/*"]
  
 }
