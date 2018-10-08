@@ -1,7 +1,6 @@
-var contatos 	= {};
-var salaStandBy = "STANDY_BY_BOT";
-
+var contatos 		   = {};
 var salaStandyIniciada = false;
+var statusBot 		   = false;
 
 function simulateMouseEvents(element, eventName) {
 	if($(element).length > 0){
@@ -24,9 +23,12 @@ function mobileNotOnline(){
 var checkAliveThread = null;
 function checkAlive() {
 	chrome.storage.sync.get(['status'], function(items) {
+	  console.log('checkAlive',items);
+	  
 	  if(!items.status || items.status == "false"){
-
+	  	statusBot = false;
 	  }else{
+	  	statusBot = true;
 	  	if(!isLoaded()){
 			if(!salaStandyIniciada){
 				//CARREGA CONTATOS NO START DA APLICAÇAO
@@ -87,6 +89,10 @@ function detectMsg(){
 
 var ponteiroContato = 1;
 function loadContacts(){
+	if(!statusBot){
+		return;
+	}
+
 	if(checkAliveThread == null){
 				
 		var numeroContatos  = document.querySelectorAll("#pane-side > div > div > div > div").length;
@@ -102,7 +108,7 @@ function loadContacts(){
 
 		checkAliveThread = setInterval(function(){
    			//+1 por causa que o nth-child recisa sair em +1
-		   	if(ponteiroContato == numeroContatos){
+		   	if(ponteiroContato == numeroContatos || !statusBot){
 		   	 	console.log('Contatos carregados',contatos);
 		   	 	//LIBERA A SALA PARA INICIAR O DETECT()
 		   	 	salaStandyIniciada  = true;
@@ -126,6 +132,7 @@ function fillContactIndex(){
 	//DPS DE CARREGAR
    	if(!isLoaded()){
    		console.log('ponteiroContato',ponteiroContato);
+
 		//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO
 	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
 	 		console.log('domSearch',domSearch,document.querySelector(domSearch));

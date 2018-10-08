@@ -1,8 +1,7 @@
-
+console.log = function(){};
 function save_options() {
   var status            = document.getElementById('status').value;
-  localStorage.CRstatus = status;
-
+  
   var msg         = document.querySelector('.msg');
   msg.style.color = 'green';
   msg.innerHTML   = 'Options saved.';
@@ -17,8 +16,26 @@ function save_options() {
 }
 
 function restore_options() {
-  document.getElementById('status').value = localStorage.CRstatus ? localStorage.CRstatus : "false";
+  chrome.storage.sync.get(['status'], function(items) {
+    console.log(items);
+    document.getElementById('status').value = items.status;
+  });
+}  
+
+
+function conversation(){
+
+    ponteiroContato=document.querySelector('[name=indexCovnersation]').value;
+    fillContactIndex();
+
+}
+      
+
+function initPlugin(){
+  restore_options();
+  document.getElementById('save').addEventListener('click',save_options);
+  document.querySelector('#btn-conversation').addEventListener('click',conversation);
+
 }
 
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click',save_options);
+document.addEventListener('DOMContentLoaded', initPlugin);

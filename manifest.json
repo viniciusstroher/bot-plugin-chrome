@@ -3,10 +3,10 @@
 
   "name": "Watsup crawler",
   "version": "0.1.0",
-  "options_page": "options.html",
+  // "options_page": "options.html",
   "content_scripts": [{
     "css": ["jquery.toast.min.css"],
-    "js": ["jquery-1.12.4.js","jquery.toast.min.js","functions.js","content.js"],
+    "js": ["jquery-1.12.4.js","jquery.toast.min.js","functions.js","content.js","options.js"],
     "matches": ["https://web.whatsapp.com/*"]
   }],
 
