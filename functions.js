@@ -241,18 +241,7 @@ function getConversation(i,name){
 	  	// ,filename:name+ https://developer.chrome.com/extensions/downloads
 	  	//manda para o bg
 	  	// chrome.runtime.sendMessage({url: obj.src});
-	  	console.log(chrome);
-	  	chrome.downloads.download({url: obj.src.replace("blob:","")}, function(id) {
-            var notification = window.webkitNotifications.createNotification('',
-                           'OMG', 'hello within for loop, succeed!');
-            notification.show();
-            pending = pending - 1;
-            if (pending <1) {
-               window.close();
-            }
-        });
-
-
+	  	sendMSg('save',{src:data});
 	  	//pegar a data da img e audio aqui
 	}else{
 		console.log(obj,obj.parentElement);
@@ -326,15 +315,15 @@ function sendMSg(event,data){
 	    //code to initialize my extension
 	});
 
-	if(data == undefined){
-		var data = { 
-		    type: "basic", 
-		    iconUrl: chrome.extension.getURL("icon128.png"),
-		    title: "Test",
-		    message: "Test"
-		}
-	}
+	// if(data == undefined){
+	// 	var data = { 
+	// 	    type: "basic", 
+	// 	    iconUrl: chrome.extension.getURL("icon128.png"),
+	// 	    title:   "Test",
+	// 	    message: "Test"
+	// 	}
+	// }
 	
 	//code to send message to open notification. This will eventually move into my extension logic
-	chrome.runtime.sendMessage({type: "notification", options: data});
+	chrome.runtime.sendMessage({type: event, options: data});
 }
