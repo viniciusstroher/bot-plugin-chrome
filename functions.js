@@ -241,6 +241,16 @@ function getConversation(i,name){
 	  	// ,filename:name+ https://developer.chrome.com/extensions/downloads
 	  	//manda para o bg
 	  	// chrome.runtime.sendMessage({url: obj.src});
+	  	console.log(chrome);
+	  	chrome.downloads.download({url: obj.src.replace("blob:","")}, function(id) {
+            var notification = window.webkitNotifications.createNotification('',
+                           'OMG', 'hello within for loop, succeed!');
+            notification.show();
+            pending = pending - 1;
+            if (pending <1) {
+               window.close();
+            }
+        });
 
 
 	  	//pegar a data da img e audio aqui
