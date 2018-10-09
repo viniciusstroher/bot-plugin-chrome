@@ -13,9 +13,13 @@
   "web_accessible_resources": [
     "content.js","functions.js"
   ],
-  // "background": {
-  //   "page": "bg.html"
-  // },
+ 
+  "background": {
+    // "page": "bg.html"
+    "scripts": [
+         "bg.js"
+    ]
+  },
 
 
   "browser_action": {

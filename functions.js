@@ -319,3 +319,22 @@ function parseDate(dateWithName){
 	return dateConversation;
 }
 
+
+
+function sendMSg(event,data){
+	chrome.extension.sendMessage({}, function(response) {
+	    //code to initialize my extension
+	});
+
+	if(data == undefined){
+		var data = { 
+		    type: "basic", 
+		    iconUrl: chrome.extension.getURL("icon128.png"),
+		    title: "Test",
+		    message: "Test"
+		}
+	}
+	
+	//code to send message to open notification. This will eventually move into my extension logic
+	chrome.runtime.sendMessage({type: "notification", options: data});
+}
