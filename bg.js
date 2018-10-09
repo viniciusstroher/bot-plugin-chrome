@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
 
     if(request.type == "save"){
-    	chrome.downloads.download({url:request.options.src}, function(r){
+    	chrome.downloads.download({url:request.options.src,filename:request.options.src.split("/").pop()}, function(r){
     		console.log('chrome.downloads:',r);
     	});
     }
