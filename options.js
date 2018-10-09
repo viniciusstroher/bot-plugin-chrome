@@ -1,4 +1,5 @@
-console.log = function(){};
+
+
 function save_options() {
   var status            = document.getElementById('status').value;
   
@@ -8,6 +9,24 @@ function save_options() {
   
   chrome.storage.sync.set({'status': status}, function() {
       console.log('Settings saved');
+      
+      if(status == "true"){
+        chrome.tabs.executeScript({
+            code: 'ponteiroContato=1;fillContactIndex();' //argument here is a string but function.toString() returns function's code
+        }, (results) => {
+            //Here we have just the innerHTML and not DOM structure
+            console.log('Popup script:')
+            console.log(results[0]);
+        });
+      }else{
+        chrome.tabs.executeScript({
+            code: 'ponteiroContato=1;' //argument here is a string but function.toString() returns function's code
+        }, (results) => {
+            //Here we have just the innerHTML and not DOM structure
+            console.log('Popup script:')
+            console.log(results[0]);
+        });
+      }
   });
 
   setTimeout(function() {
@@ -29,7 +48,7 @@ function conversation(){
     // fillContactIndex();
 
     chrome.tabs.executeScript({
-        code: 'ponteiroContato='+ponteiroContato+';fillContactIndex();' //argument here is a string but function.toString() returns function's code
+        code: 'ponteiroContato='+ponteiroContato+';fillContactIndex(true);' //argument here is a string but function.toString() returns function's code
     }, (results) => {
         //Here we have just the innerHTML and not DOM structure
         console.log('Popup script:')

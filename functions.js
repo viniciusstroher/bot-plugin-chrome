@@ -18,6 +18,7 @@ function mobileNotOnline(){
 }
 
 
+
 //ID IMG 
 //#pane-side > div > div > div > div:nth-child(18) > div > div > div.dIyEr > div
 var checkAliveThread = null;
@@ -127,18 +128,39 @@ function loadContacts(){
 }
 
 
+function isLoadedConversationScreen(){
+	//verificar se a tela de conversas ja foi carregada !!!!
+	return true;
+}
 
-function fillContactIndex(){
+function fillContactIndex(contatoAlreadyLoaded){
+
+	if(contatoAlreadyLoaded == undefined){
+		contatoAlreadyLoaded = false;
+	}
+
 	//DPS DE CARREGAR
-   	if(!isLoaded()){
+	//COLOCA isLoaded para a tela de mensagem do contato -> verificar se o loading ainda existe
+   	if(!isLoaded() && isLoadedConversationScreen()){
    		console.log('ponteiroContato',ponteiroContato);
 
 		//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO
 	 		var domSearch = "#pane-side > div > div > div > div:nth-child("+ponteiroContato+") > div > div > div.dIyEr > div";
 	 		console.log('domSearch',domSearch,document.querySelector(domSearch));
 	 		
-	 		try{
-	 			simulateMouseEvents(document.querySelector(domSearch), 'mousedown');
+	 		try{	 			
+	 			var domExists = document.querySelector(domSearch);
+	 			simulateMouseEvents(domExists, 'mousedown');
+	 			if(domExists != null){
+	 				domExists2 = domExists.parentElement.parentElement;
+	 				console.log('domExists',domExists);
+	 				
+	 				if(domExists2 != null){
+	 					if(  domExists2.querySelector('.index-contato') == null){
+	 						domExists2.innerHTML += "<span class='index-contato' style='color:red;'>"+ponteiroContato+"</span>";
+	 					}
+	 				}
+	 			}
 	 		}catch(ex){
 	 			console.log('loadContacts simulateMouseEvents ',ex);
 	 		}
@@ -148,7 +170,8 @@ function fillContactIndex(){
 
 	 		console.log('nomeContato',name);
 
-		if(!contatos.hasOwnProperty(name) && name != "" && name != null){
+		if((!contatos.hasOwnProperty(name) ||  contatoAlreadyLoaded) && name != "" && name != null){
+
 			$.toast({
 			    heading: 'Information',
 			    text: 'Carregando '+name,
