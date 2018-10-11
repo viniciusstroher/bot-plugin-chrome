@@ -79,7 +79,16 @@ function conversation2(){
         alert(results);
     });
 }
-      
+
+// var getText = Array();
+// chrome.tabs.executeScript(tabs[tab].id, {
+//     "code": "document.getElementById(\"_Your_ID_Here_\").innerText.split(' ')"
+// }, function (result) {
+//     for (i = 0; i < result[0].length; i++)
+//     getText [i] = result[0][i];
+//     console.log(getText);
+// });
+// You hav
 
 function initPlugin(){
   restore_options();
