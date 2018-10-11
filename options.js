@@ -67,18 +67,16 @@ function conversation2(){
               'if(domToSearch.length > 0){'+
               // '   alert(\'Iniciando\'); '+
               '   simulateMouseEvents(domToSearch[0],\'mousedown\');'+
-              '   return 1;'  +
               // '   alert(\'Finalizado\');'  +
               '} else {' +
               '   alert(\'Contato nao encontrado\'); '+
-              '   return 0; '+
               '}'
         //passar dom par o simulateclick e baixar nomes
 
     }, (results) => {
         //Here we have just the innerHTML and not DOM structure
         // console.log('Popup script:')
-        alert(results[0]);
+        alert(results);
     });
 }
       
