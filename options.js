@@ -78,7 +78,7 @@ function conversation2(){
     }, (results) => {
         //Here we have just the innerHTML and not DOM structure
         // console.log('Popup script:')
-        // alert(results[0]);
+        alert(results[0]);
     });
 }
       
