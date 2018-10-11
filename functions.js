@@ -18,7 +18,6 @@ function mobileNotOnline(){
 }
 
 
-
 //ID IMG 
 //#pane-side > div > div > div > div:nth-child(18) > div > div > div.dIyEr > div
 var checkAliveThread = null;
@@ -47,6 +46,9 @@ function checkAlive() {
 
 }
 
+function isOfflinePhone(){
+	return document.querySelector('[data-icon="alert-phone"]') != null ? true : false;
+}
 
 function isLoaded(){
 	return document.querySelector("#startup") != null ? true : false;
