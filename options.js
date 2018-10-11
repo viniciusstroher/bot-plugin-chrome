@@ -65,11 +65,13 @@ function conversation2(){
         code: 'var domToSearch = $(\'[dir=auto][title*="'+nomeContato+'"]\');'+
               'console.log(domToSearch);'+
               'if(domToSearch.length > 0){'+
-              '   alert(\'Iniciando\'); '+
+              // '   alert(\'Iniciando\'); '+
               '   simulateMouseEvents(domToSearch[0],\'mousedown\');'+
-              '   alert(\'Finalizado\');'  +
+              '   return 1;'  +
+              // '   alert(\'Finalizado\');'  +
               '} else {' +
               '   alert(\'Contato nao encontrado\'); '+
+              '   return 0; '+
               '}'
         //passar dom par o simulateclick e baixar nomes
 
