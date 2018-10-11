@@ -66,8 +66,8 @@ function conversation2(){
               'console.log(domToSearch);'+
               'if(domToSearch.length > 0){'+
               '   alert(\'Iniciando\'); '+
-              '   simulateclick(domToSearch,\'mousedown\');'+
-              '   alert(\'Finalizado\');'  +
+              // '   simulateclick(domToSearch,\'mousedown\');'+
+              // '   alert(\'Finalizado\');'  +
               '} else {' +
               '   alert(\'Contato nao encontrado\'); '+
               '}'
