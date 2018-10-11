@@ -130,7 +130,7 @@ function loadContacts(){
 
 function isLoadedConversationScreen(){
 	//verificar se a tela de conversas ja foi carregada !!!!
-	return true;
+	return document.querySelector("[title*=Carregando mensagens]") != null ? true : false;
 }
 
 function fillContactIndex(contatoAlreadyLoaded){
