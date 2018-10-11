@@ -62,13 +62,21 @@ function conversation2(){
     // fillContactIndex();
 
     chrome.tabs.executeScript({
-        code: 'console.log($(\'[dir=auto][title*='+nomeContato+']\'))'
+        code: 'var domToSearch = $(\'[dir=auto][title*="'+nomeContato+'"]\');'+
+              'console.log(domToSearch);'+
+              'if(domToSearch[0].length > 0)'+
+              '{ alert(\'Iniciando\'); '+
+              '  simulateclick(domToSearch,\'mousedown\');'+
+              '  alert(\'Finalizado\');'  +
+              '} else {' +
+              '   alert(\'Oi\'); '+
+              '}'
         //passar dom par o simulateclick e baixar nomes
-        
+
     }, (results) => {
         //Here we have just the innerHTML and not DOM structure
-        console.log('Popup script:')
-        console.log(results[0]);
+        // console.log('Popup script:')
+        // alert(results[0]);
     });
 }
       
