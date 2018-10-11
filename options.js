@@ -63,6 +63,8 @@ function conversation2(){
 
     chrome.tabs.executeScript({
         code: 'console.log($(\'[dir=auto][title*='+nomeContato+']\'))'
+        //passar dom par o simulateclick e baixar nomes
+        
     }, (results) => {
         //Here we have just the innerHTML and not DOM structure
         console.log('Popup script:')
