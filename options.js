@@ -64,10 +64,10 @@ function conversation2(){
     chrome.tabs.executeScript({
         code: 'var domToSearch = $(\'[dir=auto][title*="'+nomeContato+'"]\');'+
               'console.log(domToSearch);'+
-              'if(domToSearch[0].length > 0)'+
-              '{ alert(\'Iniciando\'); '+
-              '  simulateclick(domToSearch,\'mousedown\');'+
-              '  alert(\'Finalizado\');'  +
+              'if(domToSearch[0].length > 0){'+
+              '   alert(\'Iniciando\'); '+
+              '   simulateclick(domToSearch,\'mousedown\');'+
+              '   alert(\'Finalizado\');'  +
               '} else {' +
               '   alert(\'Oi\'); '+
               '}'
