@@ -55,13 +55,27 @@ function conversation(){
         console.log(results[0]);
     });
 }
+
+function conversation2(){
+
+    nomeContato = document.querySelector('[name=indexCovnersationName]').value;
+    // fillContactIndex();
+
+    chrome.tabs.executeScript({
+        code: 'console.log($(\'[dir=auto][title*='+nomeContato+']\'))'
+    }, (results) => {
+        //Here we have just the innerHTML and not DOM structure
+        console.log('Popup script:')
+        console.log(results[0]);
+    });
+}
       
 
 function initPlugin(){
   restore_options();
   document.getElementById('save').addEventListener('click',save_options);
   document.querySelector('#btn-conversation').addEventListener('click',conversation);
-
+  document.querySelector('#btn-conversation2').addEventListener('click',conversation2);
 }
 
 document.addEventListener('DOMContentLoaded', initPlugin);

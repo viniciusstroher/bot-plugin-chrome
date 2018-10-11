@@ -127,6 +127,21 @@ function loadContacts(){
 	
 }
 
+function mountNamePlugins(){
+	var names = getAllContatcsNamesLabel();
+	
+	$.each(names,function(k,v){
+
+	});
+}
+
+function getAllContatcsNamesLabel(){
+	return document.querySelectorAll("[tabindex] span[title][dir=auto]");
+}
+
+function getAllContatcsNamesLabelByName(name){
+	return document.querySelectorAll("[tabindex] span[title="+name+"][dir=auto]");
+}
 
 function isLoadedConversationScreen(){
 	//verificar se a tela de conversas ja foi carregada !!!!
