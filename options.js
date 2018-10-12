@@ -62,27 +62,28 @@ function conversation2(){
     // fillContactIndex();
 
     chrome.tabs.executeScript({
-        code: 'var domToSearch = $(\'[dir=auto][title*="'+nomeContato+'"]\');'+
+        code: '(function (){ '+
+              'var domToSearch = $(\'[dir=auto][title*="'+nomeContato+'"]\');'+
               'console.log(domToSearch);'+
               'if(domToSearch.length > 0){'+
               // '   alert(\'Iniciando\'); '+
               '   simulateMouseEvents(domToSearch[0],\'mousedown\');'+
-              '   setTimeout(function(){ '+
-
+              
               '     var maxConversations = getConversationsIndex(); '+
               '     var conversas = []; '+
               '     for(i = 0;i<maxConversations;i++){               '+
               '         conversas.push(getConversation(i)); '+
-              '     } '+
-              '   }); '+
-              // '   alert(\'Finalizado\');'  +
+              '     } return conversas;'+
+              
               '} else {' +
-              '   alert(\'Contato nao encontrado\'); '+
-              '}'
-        //passar dom par o simulateclick e baixar nomes
+              '   return false; '+
+              '}'+
+              '})();'
 
-    }, (results) => {
-        alert(maxConversations);
+    }, function(results) {
+       //passar dom par o simulateclick e baixar nomes
+        // (function (){return document.body.innerText;})();
+        alert(results);
         //Here we have just the innerHTML and not DOM structure
         // console.log('Popup script:')
         // alert(results);
