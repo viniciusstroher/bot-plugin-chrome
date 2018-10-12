@@ -244,7 +244,7 @@ function getConversationsIndex(){
 }
 
 
-function getConversation(i,name){
+function getConversation(i){
 	//PEGAR DATA TB AQUI
 
 	var obj  = document.querySelectorAll(".message-out .copyable-text[data-pre-plain-text], .message-in .copyable-text[data-pre-plain-text], .message-in img[src*='blob:'], .message-in input[type=range] ~ audio")[i];

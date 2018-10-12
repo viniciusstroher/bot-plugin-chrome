@@ -67,6 +67,14 @@ function conversation2(){
               'if(domToSearch.length > 0){'+
               // '   alert(\'Iniciando\'); '+
               '   simulateMouseEvents(domToSearch[0],\'mousedown\');'+
+              '   setTimeout(function(){ '+
+
+              '     var maxConversations = getConversationsIndex(); '+
+              '     var conversas = []; '+
+              '     for(i = 0;i<maxConversations;i++){               '+
+              '         conversas.push(getConversation(i)); '+
+              '     } '+
+              '   }); '+
               // '   alert(\'Finalizado\');'  +
               '} else {' +
               '   alert(\'Contato nao encontrado\'); '+
@@ -74,9 +82,10 @@ function conversation2(){
         //passar dom par o simulateclick e baixar nomes
 
     }, (results) => {
+        alert(maxConversations);
         //Here we have just the innerHTML and not DOM structure
         // console.log('Popup script:')
-        alert(results);
+        // alert(results);
     });
 }
 
