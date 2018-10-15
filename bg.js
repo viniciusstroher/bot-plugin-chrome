@@ -10,15 +10,40 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	    }
 
-	    var url    	   = "http://localhost:8093/files";
-	    var params 	   = "url="+request.data.src;
-	  	xmlhttp.onload = function(e){
-	  		console.log('onload',e);
-	  	};
 
-	    xmlhttp.open("POST", url, true);
-	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	    xmlhttp.send(params);
+	    var oReq = new XMLHttpRequest();
+		oReq.open("GET", 'blob:'+request.data.src, true);
+		oReq.responseType = "blob";
+		
+		oReq.onload = function(oEvent) {
+		  var blob = oReq.response;
+		  console.log('blob',blob);
+
+		   var url    	   = "http://localhost:8093/files";
+		    var params 	   = "url="+request.data.src;
+		  	xmlhttp.onload = function(e){
+		  		console.log('onload',e);
+		  	};
+
+		    xmlhttp.open("POST", url, true);
+		    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    xmlhttp.send(params);
+
+		    SERVER
+		    var url    	   = "http://localhost:8093/files";
+		    var params 	   = "url="+request.data.src;
+		  	xmlhttp.onload = function(e){
+		  		console.log('onload',e);
+		  	};
+
+		    xmlhttp.open("POST", url, true);
+		    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    xmlhttp.send(params);
+		};
+
+		oReq.send();
+
+	   
 
     }
 });
