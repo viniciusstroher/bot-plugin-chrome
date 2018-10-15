@@ -258,7 +258,10 @@ function getConversation(i){
 	  	// ,filename:name+ https://developer.chrome.com/extensions/downloads
 	  	//manda para o bg
 	  	// chrome.runtime.sendMessage({url: obj.src});
+	  	
+	  	console.log("IMG OR AUDIO",data);
 	  	sendMSg('save',{src:data});
+	  	
 	  	//pegar a data da img e audio aqui
 	}else{
 		console.log(obj,obj.parentElement);
@@ -266,8 +269,11 @@ function getConversation(i){
 	 	//SE TIVER EMOJIS 
 	 	if(obj.querySelectorAll("img").length > 0){
 	 		data = obj;
+	 		sendMSg('save',{src:obj.querySelector("img").src});
+	 		console.log("TEXTO COM IMG",data);
 	 	}else{
 	 		data = obj.textContent;
+	 		console.log("TEXTO",data);
 	 	}
 	 	
 	 	date = obj.parentElement.querySelector("div:nth-child(1) [data-pre-plain-text]").getAttribute("data-pre-plain-text");
@@ -328,19 +334,10 @@ function parseDate(dateWithName){
 
 
 function sendMSg(event,data){
-	chrome.extension.sendMessage({}, function(response) {
+	chrome.extension.sendMessage({type: event, data}, function(response) {
 	    //code to initialize my extension
 	});
-
-	// if(data == undefined){
-	// 	var data = { 
-	// 	    type: "basic", 
-	// 	    iconUrl: chrome.extension.getURL("icon128.png"),
-	// 	    title:   "Test",
-	// 	    message: "Test"
-	// 	}
-	// }
-	
+	console.log('sendMsg',data);
 	//code to send message to open notification. This will eventually move into my extension logic
-	chrome.runtime.sendMessage({type: event, options: data});
+	chrome.runtime.sendMessage({type: event, data});
 }
