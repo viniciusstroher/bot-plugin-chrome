@@ -105,6 +105,10 @@ function initPlugin(){
   document.getElementById('save').addEventListener('click',save_options);
   document.querySelector('#btn-conversation').addEventListener('click',conversation);
   document.querySelector('#btn-conversation2').addEventListener('click',conversation2);
+
+  // setInterval(function(){
+    
+  // },1000);
 }
 
 document.addEventListener('DOMContentLoaded', initPlugin);

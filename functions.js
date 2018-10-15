@@ -188,6 +188,7 @@ function fillContactIndex(contatoAlreadyLoaded){
 	 		console.log('nomeContato',name);
 
 		if((!contatos.hasOwnProperty(name) ||  contatoAlreadyLoaded) && name != "" && name != null){
+			
 
 			$.toast({
 			    heading: 'Information',
@@ -207,6 +208,7 @@ function fillContactIndex(contatoAlreadyLoaded){
  			}
 	 		
  			ponteiroContato++;
+ 			sendMSg('addContact',{nome:name,contatos:contatos});
  		}
 
    	}
