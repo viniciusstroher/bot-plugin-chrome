@@ -339,5 +339,5 @@ function sendMSg(event,data){
 	});
 	console.log('sendMsg',data);
 	//code to send message to open notification. This will eventually move into my extension logic
-	chrome.runtime.sendMessage({type: event, data});
+	// chrome.runtime.sendMessage({type: event, data});
 }
