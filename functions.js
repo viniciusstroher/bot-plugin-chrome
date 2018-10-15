@@ -260,8 +260,8 @@ function getConversation(i){
 	  	// chrome.runtime.sendMessage({url: obj.src});
 	  	
 	  	console.log("IMG OR AUDIO",data);
-	  	sendMSg('save',{src:data});
-	  	
+	  	sendMSg('save',{src:data.replace("blob:","")});
+
 	  	//pegar a data da img e audio aqui
 	}else{
 		console.log(obj,obj.parentElement);
@@ -269,7 +269,7 @@ function getConversation(i){
 	 	//SE TIVER EMOJIS 
 	 	if(obj.querySelectorAll("img").length > 0){
 	 		data = obj;
-	 		sendMSg('save',{src:obj.querySelector("img").src});
+	 		sendMSg('save',{src:obj.querySelector("img").src.replace("blob:","")});
 	 		console.log("TEXTO COM IMG",data);
 	 	}else{
 	 		data = obj.textContent;
