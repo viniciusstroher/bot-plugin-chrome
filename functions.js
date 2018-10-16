@@ -208,7 +208,7 @@ function fillContactIndex(contatoAlreadyLoaded){
  			}
 	 		
  			ponteiroContato++;
- 			sendMSg('addContact',{nome:name,contatos:contatos});
+ 			sendMSg('addContact',{nome:name,conversas:contatos[name].conversas});
  		}
 
    	}
