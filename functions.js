@@ -147,7 +147,7 @@ function getAllContatcsNamesLabelByName(name){
 
 function isLoadedConversationScreen(){
 	//verificar se a tela de conversas ja foi carregada !!!!
-	return document.querySelector("[title*=Carregando mensagens]") != null ? true : false;
+	return document.querySelector("[title*='Carregando mensagens']") != null ? true : false;
 }
 
 function fillContactIndex(contatoAlreadyLoaded){
@@ -158,7 +158,7 @@ function fillContactIndex(contatoAlreadyLoaded){
 
 	//DPS DE CARREGAR
 	//COLOCA isLoaded para a tela de mensagem do contato -> verificar se o loading ainda existe
-   	if(!isLoaded() && isLoadedConversationScreen()){
+   	if(!isLoaded() && !isLoadedConversationScreen()){
    		console.log('ponteiroContato',ponteiroContato);
 
 		//CUIDAR !!!! POIS DIV div.dIyEr PODE MUDAR A CLASS dIyEr SE PARAR DE BUSCAR TODOS OS CONTATOS REVER ESSE PONTO

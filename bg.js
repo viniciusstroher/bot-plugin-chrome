@@ -61,8 +61,10 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 	  	};
 
 	    xmlhttp.open("POST", url, true);
-	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	    xmlhttp.send(params);
+	    // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    xmlhttp.setRequestHeader("Content-Type", "application/json");
+	    xmlhttp.send(JSON.stringify(request.data));
+	    // xmlhttp.send(params);
 
     }
 });
