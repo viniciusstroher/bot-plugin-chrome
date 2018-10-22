@@ -8,11 +8,10 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 		xmlhttp.responseType = "blob";
 		
 		xmlhttp.onload = function(oEvent) {
-		  	var blob = xmlhttp.response;
-		  	console.log('blob',blob);
-			
+		  	var blob 	 = xmlhttp.response;
+			var ext 	 = request.data.src.split('.').pop();
 		  	var formData = new FormData();
-			formData.append("object", blob);
+			formData.append("object", blob,'arquivo.watz.'+ext);
 
 			//SERVER
 			var xmlhttp2    = new XMLHttpRequest();
