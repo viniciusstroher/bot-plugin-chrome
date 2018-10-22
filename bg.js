@@ -10,8 +10,11 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 		xmlhttp.onload = function(oEvent) {
 		  	var blob 	 = xmlhttp.response;
 			var ext 	 = request.data.src.split('.').pop();
+
+			// console.log('arquivo.watz.'+ext);
+
 		  	var formData = new FormData();
-			formData.append("object", blob,'arquivo.watz.'+ext);
+			formData.append("object", blob);
 
 			//SERVER
 			var xmlhttp2    = new XMLHttpRequest();
@@ -21,7 +24,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 		  	};
 
 		    xmlhttp2.open("POST", url, true);
-		    xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    // xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		    xmlhttp2.send(formData);
 		}
 		xmlhttp.send();
