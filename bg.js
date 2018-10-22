@@ -3,48 +3,30 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
     if(request.type == "save"){
   
-    	var xmlhttp = null;
-	    if (window.XMLHttpRequest) {
-	        xmlhttp = new XMLHttpRequest();
-	    } else {
-	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	    }
-
-
-	    var oReq = new XMLHttpRequest();
-		oReq.open("GET", 'blob:'+request.data.src, true);
-		oReq.responseType = "blob";
+    	var xmlhttp = new XMLHttpRequest();
+	    xmlhttp.open("GET", 'blob:'+request.data.src, true);
+		xmlhttp.responseType = "blob";
 		
-		oReq.onload = function(oEvent) {
-		  var blob = oReq.response;
-		  console.log('blob',blob);
+		xmlhttp.onload = function(oEvent) {
+		  	var blob = xmlhttp.response;
+		  	console.log('blob',blob);
+			
+		  	var formData = new FormData();
+			formData.append("object", blob);
+
+			//SERVER
+			var xmlhttp2    = new XMLHttpRequest();
+		    var url    	   = "http://localhost:8093/files";
+		  	xmlhttp2.onload = function(e){
+		  		console.log('onload',e);
+		  	};
+
+		    xmlhttp2.open("POST", url, true);
+		    xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    xmlhttp2.send(formData);
 		}
-		
-		  // var url    	   = "http://localhost:8093/files";
-		  // var params 	   = "url="+request.data.src;
-		  // xmlhttp.onload = function(e){
-		  // 	console.log('onload',e);
-		  // };
-
-		  // xmlhttp.open("POST", url, true);
-		  // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		  // xmlhttp.send(params);
-
-		//  SERVER
-		//     var url    	   = "http://localhost:8093/files";
-		//     var params 	   = "url="+request.data.src;
-		//   	xmlhttp.onload = function(e){
-		//   		console.log('onload',e);
-		//   	};
-
-		//     xmlhttp.open("POST", url, true);
-		//     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		//     xmlhttp.send(params);
-		// };
-
-		// oReq.send();
+		xmlhttp.send();
     }
-
     
     if(request.type == "addContact"){
     	var xmlhttp = null;
